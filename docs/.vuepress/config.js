@@ -49,6 +49,19 @@ module.exports = {
         text: '贡献',
         link: '/contribute/',
       },
+      {
+        text: '镜像',
+        children: [
+          {
+            text: '全球',
+            link: 'https://miswanting.github.io/ecd/',
+          },
+          {
+            text: '中国大陆',
+            link: 'https://miswanting.gitee.io/ecd/',
+          },
+        ]
+      },
     ],
     sidebar: {
       '/guide/': [

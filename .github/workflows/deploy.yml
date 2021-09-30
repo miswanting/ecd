@@ -41,7 +41,7 @@ jobs:
       - name: Push
         uses: github-actions-x/commit@v2.8
         with:
-          github-token: ${{ secrets.KEY }}
+          github-token: ${{ secrets.key }}
           push-branch: "gh-pages"
           commit-message: "Auto Generate & Deploy"
           force-add: "true"

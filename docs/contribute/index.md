@@ -2,11 +2,11 @@
 
 ## 讨论
 
-请移步至 [Github Discussions](https://github.com/miswanting/Era-Chinese-Documentation/discussions)。
+请移步至 [Github Discussions](https://github.com/miswanting/ecd/discussions)。
 
 ## 勘误
 
-请移步至 [Github Issues](https://github.com/miswanting/Era-Chinese-Documentation/issues)，并发起一个 Issue。更正完毕后会关闭相关 Issue。
+请移步至 [Github Issues](https://github.com/miswanting/ecd/issues)，并发起一个 Issue。更正完毕后会关闭相关 Issue。
 
 ## 参与创作
 
@@ -17,12 +17,12 @@
 ### Fork 仓库
 
 1. 登录 Github。
-2. Fork Era-Chinese-Documentation 项目至自己的账号中。
+2. Fork ecd 项目至自己的账号中。
 
 ### Clone 至本地
 
 ```
-git clone https://github.com/<你的用户名>/Era-Chinese-Documentation.git
+git clone https://github.com/<你的用户名>/ecd.git
 ```
 
 ### 切换到活跃分支
@@ -68,7 +68,7 @@ git push
 ### 提交 PR
 
 1. 去到主项目的 PR 界面
-   - 地址：https://github.com/miswanting/Era-Chinese-Documentation/pulls
+   - 地址：https://github.com/miswanting/ecd/pulls
 2. 点击`New`
 3. 做好设置，等待合并。
 

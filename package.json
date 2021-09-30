@@ -1,9 +1,9 @@
 {
   "name": "era-chinese-documentation",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "做便捷至极的 Emuera + Eramaker + Erabasic 文档。",
   "main": "",
-  "repository": "https://github.com/miswanting/Emuera-Chinese-Document.git",
+  "repository": "https://github.com/miswanting/ecd.git",
   "author": "Miswanting <ihex@foxmail.com>",
   "license": "GPL-3.0+",
   "scripts": {

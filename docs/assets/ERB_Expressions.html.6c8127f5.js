@@ -1,0 +1,1 @@
+const e={key:"v-c93a1776",path:"/reference/ERB_Expressions.html",title:"ERB \u7684\u8868\u8FBE\u5F0F",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],filePathRelative:"reference/ERB_Expressions.md",git:{updatedTime:1633591923e3,contributors:[{name:"Miswanting",email:"ihex@foxmail.com",commits:1}]}};export{e as data};

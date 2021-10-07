@@ -20,7 +20,7 @@ features:
   - title: 更深入
     details: 从最简单的 Emuera 游戏脚本开始，一直深入到对 Eramaker 和 Emuera 的源码分析。
   - title: 更快速
-    details: 本文档的部署使用了最新的文档框架 Vuepress-vite。在文档表现力、交互复杂度、页面导航、内容编写和部署自动化方面都表现出了简便和敏捷的特性。能够为文档提供一流的基础支持。
+    details: 本文档的部署使用了最新的文档框架 vuepress-vite。在文档表现力、交互复杂度、页面导航、内容编写和部署自动化方面都表现出了简便和敏捷的特性。能够为文档提供一流的基础支持。
   - title: 更通用
     details: Emuera 引擎本身设计定位存在特殊性。本文档在翻译与创作时对相关的描述进行了脱敏。
 footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
@@ -30,7 +30,7 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 
 本文档正在**加急**制作中。
 
-无论您是通过何种途径了解到本项目，在您希望提出帮助、意见或建议时，都推荐您优先移步至 **[讨论](contribute/#讨论)** 或 **[勘误](contribute/#勘误)** 条目，以得到第一时间的支持。
+无论您是通过何种途径了解到本项目，在您希望提出帮助、意见或建议时，都推荐您优先移步至[讨论](contribute/#讨论)或[勘误](contribute/#勘误)条目，以得到第一时间的支持。
 
 让我们共同将这个项目做好！
 

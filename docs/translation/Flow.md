@@ -3,211 +3,231 @@ import FlowTitle from './FlowTitle.vue'
 </script> -->
 # 流程图
 
-> 翻译自原文档：https://osdn.net/projects/emuera/wiki/flow
+> 翻译自原文档：[https://osdn.net/projects/emuera/wiki/flow](https://osdn.net/projects/emuera/wiki/flow)
 
-流程图是用DiagramDesigner创建的。
+本章节所涉及的流程图是用 [DiagramDesigner](http://logicnet.dk/DiagramDesigner/) 编辑的。流程图源文件文件在[这里](https://osdn.net/projects/emuera/wiki/flow/attach/flow1821.ddd)。
 
-数据文件在[这里]()。
+后文除另有说明，否则句子的主语应是`Emuera.exe`。
 
-在以下描述中，除非另有说明，否则句子的主语是`Emuera.exe`。
+## Title 标题流程
 
-## TITLE
+流程进入方式：
 
-在启动和读取`ERB`后，并在运行`BEGIN TITLE`后。
-
-<!-- <FlowTitle /> -->
+- 自动：游戏引擎启动后会读取`ERB`文件，文件全部读取完成后，自动进入；
+- 手动：使用`Begin Title`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/title.gif)
 
-如果`@SYSTEM_TITLE`被定义了，它就会被调用，其他的就不做了。
+若`@System_Title`函数已定义，则调用它；若存在多个定义，则调用第一次读取到的定义。
 
-如果`@SYSTEM_TITLE`在没有`BEGIN`或`LOADDATA`指令的情况下被`RETURN`，就没有下一个操作要执行，错误终止。
+如果`@System_Title`函数在`Return`之前，没有调用`Begin`或`LoadData`命令，则会报错退出。
 
-如果没有定义`@SYSTEM_TITLE`，就会使用标准的标题程序。
+若没有定义`@System_Title`，就会执行后续的默认标题流程。
 
-标准标题屏幕上的文字，如`[0]从头开始`，可以被改变。
+默认标题中的文字，如标题、版本、介绍、命令按钮（如`[0]从头开始`）等，都可以被改变，详见 [_replace.csv](Replace_CSV#系统菜单0-系统菜单1)。
 
-详见[_replace.csv]()。
+在这个界面中，若选择`[0]从头开始`，首先要做的就是初始化数据。如`Str`和`PrintLV`的初始值（与`ResetData`命令同理），`AddChara 0`等。
 
-如果选择`[0]从头开始`，首先要做的是初始化数据。
+然后自动执行`Begin First`命令。进入`First`流程。
 
-具体来说，`STR`和`PRINTLV`的初始值被设置（与`RESETDATA`指令相同），`ADDCHARA 0`，等等。
+若选择`[1]加载存档`，若已定义`@Title_LoadGame`函数，则调用。
 
-接下来，`BEGIN FIRST`被执行，并过渡到`FIRST`。
+若未定义，则显示默认加载界面。该界面与`@LoadGame`所调用的界面略有不同。
 
-如果选择了`[1]加载和启动`，如果定义了，就会调用`@TITLE_LOADGAME`。
+## First 从头开始流程
 
-如果没有定义，就会显示标准加载屏幕。
+流程进入方式：
 
-这与`@LOADGAME`所调用的屏幕略有不同。
-
-## FIRST
-
-当在标题屏幕上选择了`[0]从头开始`，并且在执行了`BEGIN FIRST`之后。
+- 自动：在标题界面选择了`[0]从头开始`后，自动进入；
+- 手动：使用`Begin First`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/first.gif)
 
-如果在`@EVENTFIRST`中没有执行`BEGIN`指令，就没有下一个要执行的进程，错误结束。
+如果`@EventFirst`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
-## SHOP
+## Shop 商店流程
 
-在加载和运行`BEGIN SHOP`后。
+::: warning 注意
+
+此处流程的名称具有迷惑性，虽然名称是商店，但其实并不是指游戏中的物品购买流程，而是游戏的行动主界面，即行动按钮最多的那个界面。一般来说，可以理解为行动按钮分层排列就像商店里的商品一样的那种感觉。
+
+:::
+
+流程进入方式：
+
+- 自动：加载存档后自动进入；
+- 手动：使用`Begin Shop`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/shop.gif)
 
-如果在加载后，`@EVENTSHOP`未被处理。
+如果该流程是从加载存档处进入，则不进行`@EventShop`处理。
 
-在`@SHOW_SHOP`调用之后，要求输入。如果输入是0-99，则处理购买，否则就调用`@USERSHOP`。
-这个范围可以在`_replace.csv`中改变。 详见[_replace.csv]()。
+在`@Show_Shop`执行完毕后，等待输入，若输入序号在0~99内，则执行内置购买逻辑，若不在内，则调用`@UserShop`函数。这个数值范围可被改变，详见 [_replace.csv](Replace_CSV)。
 
-请注意，`@PRINT_ITEMSHOP`指令显示的项目范围是`ITEMNAME`或`ITEMSALES`中的元素数，以小者为准（标准是1000）。
+注意：`@Print_ItemShop`函数显示的项目范围是`ItemName`或`ItemSales`中的项目数，以小者为准（标准是1000）。
 
-当购买过程被调用时，要确定相应的`ITEMSALES`是否为非零，或者MONEY是否大于`ITEMPRICE`。
+购买时，要确定相应的`ItemSales`是否为非零，或者`Money`是否大于`ItemPrice`。
 
-如果购买决策失败，则要求再次输入。
+若购买失败，则会要求再次输入。
 
-在 Eramaker 中，如果购买失败，用户必须从`@SHOW_SHOP`重新开始。
+在 Eramaker 中，如果购买失败，用户必须从`@Show_Shop`重新开始。
 
-如果购买决策成功，将`ITEM`编号分配给`BOUGHT`变量，将`ITEM:BOUGHT`增加1，并通过`ITEMPRICE:BOUGHT`减少`MONEY`。
+如果购买决策成功，将`Item`编号分配给`Bought`变量，将`Item:Bought`增加1，并通过`ItemPrice:Bought`减少`Money`。
 
-呼叫`@EVENTBUY`，返回`@SHOW_SHOP`。
+调用`@EventBuy`，返回`@Show_Shop`。
 
-除非在某个地方发出`BEGIN`指令，否则你永远不会离开`SHOP`。
+除非调用`Begin`指令，否则你永远不会离开`Shop`流程。
 
 ## TRAIN
 
-在执行`BEGIN TRAIN`后。
+流程进入方式：
+
+- 手动：使用`Begin Train`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/train.gif)
 
-首先，一些变量会被初始化。
+进入流程后，首先一些变量会被初始化，如：
 
-具体来说，将0分配给`ASSIPLAY:0`，-1分配给`PREVCOM:0`，-1分配给`NEXTCOM:0`。
+- `AssiPlay:0 = 0`
+- `PrevCom:0 = -1`
+- `NextCom:0 = -1`
+- `TFlag = 0`
+- `GotJuel`、`TEquip`、`EX`、`Palam`和`Source`中的所有角色都被设置为0。
+- 最后，为所有角色的`STAIN:2`分配2，为`STAIN:3`分配1，为`STAIN:4`分配8，为其他分配0。
 
-此外，`TFLAG`被设置为0，`GOTJUEL`、`TEQUIP`、`EX`、`PALAM`和`SOURCE`的所有字符都被设置为0。
+当你离开`Train`流程时，这些值不会被初始化，所以如果你在`Shop`里保存，这些值会保留在你的保存数据中。
 
-最后，为所有字符的`STAIN:2`分配2，为`STAIN:3`分配1，为`STAIN:4`分配8，为其他分配0。
+你可以通过`@SaveInfo`或其他方法将角色的`GotJuel`、`TEquip`、`EX`、`Palam`等指定为0来保存保存数据的大小。
 
-当你离开训练流程时，这些值不会被初始化，所以如果你在商店里保存，这些值会保留在你的保存数据中。
+这里不解释`NextCom`的非负值的行为，因为它含有一个严重的 Bug。
 
-你可以通过`@SAVEINFO`或其他方法将角色的`GOTJUEL`、`TEQUIP`、`EX`、`PALAM`等指定为0来保存保存数据的大小。
+Emuera 的`NextCom`是为了兼容旧代码而设计的，包括上述的 Bug，且并不打算用于新的用途。
 
-这里不解释`NEXTCOM`的非负值的行为，因为它有一个严重的错误。
+关于`CallTrain`指令，见[命令](Command)。
 
-Emuera的`NEXTCOM`是为了重现旧代码的行为而实施的，包括上述的缺陷，并不打算用于新的用途。
+调用`@Show_Status`后会显示可用的`Train`。
 
-关于`CALLTRAIN`指令，见[扩展]()。
+会搜索`@Com_AbleXX`，寻找那些有定义的`TrainName`。
 
-显示调用`@SHOW_STATUS`后可执行的`TRAIN`。
+搜索范围（图中的`Max_Train`）对于 Emuera 来说是`VariableSize.csv`中指定的`TrainName`范围，对于 Eramaker 来说是`2147483647`。
 
-搜索`@COM_ABLExx`，寻找那些有定义的`TRAINNAME`。
+如果`@Com_AbleXX`没有被定义或返回非零值，那么它就是可用的，`TrainName`被打印出来。
 
-搜索范围（图中的`MAX_TRAIN`）对于Emuera来说是到`VariableSize.csv`中指定的`TRAINNAME`范围，对于 Eramaker 来说是到2147483647。
+如果`@Com_AbleXX`返回0，则不可用，不显示`TrainName`。
 
-如果`@COM_ABLExx`没有被定义或返回非零值，那么它就是可执行的，`TRAINNAME`被打印出来。
+在这个时候，它记住了是否可用。 (这并不意味着`@Com_AbleXX`在运行时被再次调用）。
 
-如果`@COM_ABLExx`返回0，则不能执行，不显示`TRAINNAME`。
+显示`TrainName`后，调用`@Show_UserCom`。
 
-在这个时候，它记住了是否可执行。 (这并不意味着`@COM_ABLExx`在运行时被再次调用）。
+在`@Show_UserCom`之后，输入前初始化`Up`、`Down`和`LoseBase`。
 
-显示`TRAINNAME`后，调用`@SHOW_USERCOM`。
+然后等待用户输入。
 
-在`@SHOW_USERCOM`之后，输入前初始化`UP`、`DOWN`和`LOSEBASE`。
+输入的结果与`@Com_AbleXX`的结果进行核对，如果该命令是可执行的，则调用相应的`@ComXX`。
 
-之后，要求输入。
+首先，`Train`号被分配给`SelectCom`变量，所有字符的`NowEX`的所有元素被设置为0。
 
-输入的结果与`@COM_ABLExx`的结果进行核对，如果该命令是可执行的，则调用相应的`@COMxx`。
+接下来，`@EventCom`被调用，接着是相应的`@Com`。
 
-首先，`TRAIN`号被分配给`SELECTCOM`变量，所有字符的`NOWEX`的所有元素被设置为0。
+如果`@Com`返回一个非零值，则调用`@Source_Check`、`@EventComEnd`并返回`@Show_Status`。
 
-接下来，`@EVENTCOM`被调用，接着是相应的`@COM`。
+在`@Source_Check`完成后，在调用`@EventComEnd`前，将所有字符的`Source`的所有元素设置为0。
 
-如果`@COM`返回一个非零值，则调用`@SOURCE_CHECK`、`@EVENTCOMEND`并返回`@SHOW_STATUS`。
+如果在`@Source_Check`之后，`@EventComEnd`不存在或者在`@EventComEnd`中没有给出WAIT指令，那么在`@Show_Status`之前就会执行一次`Wait`。
 
-在`@SOURCE_CHECK`完成后，在调用`@EVENTCOMEND`前，将所有字符的`SOURCE`的所有元素设置为0。
+如果`@Com`返回0，则返回到`@Show_Status`。
 
-如果在`@SOURCE_CHECK`之后，`@EVENTCOMEND`不存在或者在`@EVENTCOMEND`中没有给出WAIT指令，那么在`@SHOW_STATUS`之前就会产生一个`WAIT`。
+注意，当`UpCheck`指令被执行时，`Up`和`Down`的值与`Target`的`Palam`相加和相减，并且`Up`和`Down`的值都被分配为0。
 
-如果`@COM`返回0，则返回到`@SHOW_STATUS`。
+如果输入的结果不是可执行的命令，则调用`@UserCom`并返回`@Show_Status`。
 
-注意，当`UPCHECK`指令被执行时，`UP`和`DOWN`的值与`TARGET`的`PALAM`相加和相减，并且`UP`和`DOWN`的值都被分配为0。
+除非调用`Begin`指令，否则你永远不会离开`Train`流程。
 
-如果输入的结果不是可执行的命令，则调用`@USERCOM`并返回`@SHOW_STATUS`。
+## AblUp 升级流程
 
-除非在某个地方发出`BEGIN`命令，否则你永远不会离开`TRAIN`。
+流程进入方式：
 
-## ABLUP
-
-在执行了`BEGIN ABLUP`之后。
+- 手动：使用`Begin AblUp`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/ablup.gif)
 
-调用`@SHOW_JUEL`和`@SHOW_ABLUP_SELECT`来请求输入。
+调用`@Show_Juel`和`@Show_AblUp_Select`后等待用户输入。
 
-如果输入的范围是0-99，找到相应的`@ABLUP`。
+如果输入的范围是0~99，找到相应的`@AblUp`。
 
-如果定义了相应的`@ABLUP`，则调用`@ABLUP`并返回到`@SHOW_JUEL`。
+如果定义了相应的`@AblUp`，则调用`@AblUp`并返回到`@Show_Juel`。
 
-如果没有定义，就会再次要求输入。
+如果没有定义，就会再次等待用户输入。
 
-在 Eramaker 中，如果没有定义，就从`@SHOW_JUEL`重新开始。
+在 Eramaker 中，如果没有定义，就从`@Show_Juel`重新开始。
 
-如果输入值在0-99范围之外，则调用`@USERABLUP`并返回`@SHOW_JUEL`。
+如果输入值在0-99范围之外，则调用`@UserAblUp`并返回`@Show_Juel`。
 
-从Emuera 1.705开始，没有办法改变这个范围。
+从 Emuera 1.705开始，没有办法改变这个范围。
 
-除非在某处给出`BEGIN`指令，否则你永远无法从`ABLUP`中出来。
+除非调用`Begin`指令，否则你永远不会离开`AblUp`流程。
 
-## AFTERTRAIN
+## AfterTrain 
 
-在执行`BEGIN AFTERTRAIN`后。
+流程进入方式：
+
+- 手动：使用`Begin AfterTrain`语句手动进入。
+
+如果`@EventEnd`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/aftertrain.gif)
 
-如果在`@EVENTEND`内没有执行`BEGIN`指令，就没有下一个进程可以执行，错误结束。
+## TurnEnd
 
-## TURNEND
+流程进入方式：
 
-在执行了`@BEGIN TURNEND`之后。
+- 手动：使用`Begin TurnEnd`语句手动进入。
+
+如果`@EventTurnEnd`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/turnend.gif)
 
-如果在`@EVENTTURNEND`内没有执行`BEGIN`指令，就没有下一个进程可以执行，错误结束。
+## LoadGame
 
-## LOADGAME
+流程进入方式：
 
-当执行`LOADGAME`指令时。
+- 手动：使用`LoadGame`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/loadgame.gif)
 
-`BEGIN`指令包含`RETURN`指令，`BEGIN`下面的语句从不执行，但`LOADDATA`和`SAVEDATA`指令与`CALL`指令一样返回原处。
+`Begin`指令自带`Return`特性，`Begin`指令以下的语句从不执行，但`LoadData`和`SaveData`指令与`Call`指令一样，执行完毕后会返回原处。
 
-然而，当`LOAD`被执行时，它就会忘记原来的位置并过渡到`LOADDATAEND`。
+然而，当`Load`命令被执行时，它就会注销原来的调用位置并进入到`LoadDataEnd`。
 
-## SAVEGAME
+## SaveGame
 
-当`@SAVEGAME`指令被执行时。
+流程进入方式：
+
+- 手动：使用`SaveGame`语句手动进入。
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/savegame.gif)
 
-调用`@SAVEINFO`的时机是在实际写完之前。
+调用`@SaveInfo`的时机是在实际写完存档之前。
 
-## LOADDATAEND
+## LoadDataEnd
 
-在`LOADGAME`中执行了`LOAD`后，在执行了`LOADDATA`指令后。
+流程进入方式：
+
+- 自动：`LoadData`命令执行完成后自动进入；
+- 自动：`LoadGame`中`Load`命令执行完成后自动进入；
 
 ![](https://osdn.net/projects/emuera/wiki/flow/attach/loaddataend1821.gif)
 
-当执行`LOAD`时，所有以前的状态，包括被调用的函数，都被擦除。
+当执行`Load`时，所有以前的状态，包括被调用的函数，都被擦除。
 
-Eramaker 在这里什么都不做，就过渡到`@SHOW_SHOP`。
+Eramaker 在这里直接过渡到`@SHOW_SHOP`。
 
-在 Emuera 中，如果`@SYSTEM_LOADEND`被定义，`@SYSTEM_LOADEND`将被执行。
+在 Emuera 中，如果`@System_LoadEnd`被定义，则调用。
 
-如果`BEGIN`指令在`@SYSTEM_LOADEND`结束之前被执行，它就会过渡到那里。
+如果`Begin`指令在`@System_LoadEnd`结束之前被调用，它就会过渡到那里。
 
-否则，如果定义了`@EVENTLOAD`，`就会执行@EVENTLOAD`。
+否则，如果定义了`@EventLoad`，就会执行`@EventLoad`。
 
-如果`BEGIN`指令在`@EVENTLOAD`结束前被执行，它就会向该方向移动。
+如果`Begin`指令在`@EventLoad`结束前被执行，它就会向该方向移动。
 
-如果`BEGIN`指令没有被执行，则照常过渡到`@SHOW_SHOP`。
+如果`Begin`指令没有被执行，则照常过渡到`@Show_Shop`。

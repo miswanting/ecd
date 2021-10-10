@@ -53,7 +53,7 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
    - :green_circle:`直译`[调试模式](translation/Debug_Mode)
    - :green_circle:`直译`[\_replace.csv](translation/Replace_CSV)
    - :green_circle:`直译`[强制配置项目](translation/Config)
-   - :yellow_circle:`直译`[程序流程](translation/Flow)
+   - :green_circle:`直译`[程序流程](translation/Flow)
    - :yellow_circle:`直译`[与 EraMaker 的差异](translation/Difference)
    - :yellow_circle:`直译`新增的扩展语法
      - :yellow_circle:`直译`[常规](translation/General)
@@ -70,8 +70,24 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 
 ## 第二步：指南部分
 
-- :green_circle:`指南`[快速开始](guide/Quick_Start)
-- :yellow_circle:`指南`[入门教程](guide/tutorials/)
+- :green_circle:`教程`[快速开始](guide/Quick_Start)
+- :yellow_circle:`教程`[入门教程](guide/tutorials/)
+  - :black_circle:`教程`Emuera 引擎的使用
+  - :green_circle:`教程`[常量与变量](guide/tutorials/Variable)
+  - :yellow_circle:`教程`[数值与文本](guide/tutorials/Type)
+  - :yellow_circle:`教程`[输入与输出](guide/tutorials/IO)
+  - :black_circle:`教程`基本运算
+  - :black_circle:`教程`表达式
+  - :black_circle:`教程`简单语句
+  - :black_circle:`教程`复合语句
+  - :black_circle:`教程`函数的定义与用法
+  - :black_circle:`教程`游戏的保存与加载
+  - :black_circle:`教程`错误与异常
+  - :black_circle:`教程`内置流程
+- :black_circle:`教程`进阶教程
+  - :black_circle:`教程`角色的定义、注册、使用与注销
+- :black_circle:`教程`高级教程
+  - :black_circle:`教程`开发实战经验与技巧
 - :black_circle:`指南`MCS 代码风格介绍
 - :black_circle:`指南`Era 系列历史
 

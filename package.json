@@ -13,7 +13,9 @@
     "docs:serve": "yarn vitepress serve docs"
   },
   "devDependencies": {
+    "@vuepress/plugin-google-analytics": "next",
     "@vuepress/plugin-register-components": "next",
+    "@vuepress/plugin-shiki": "next",
     "pug": "latest",
     "vuepress-vite": "next"
   }

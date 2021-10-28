@@ -164,9 +164,9 @@ module.exports = {
       '@vuepress/plugin-google-analytics',
       { id: 'G-G6WWR5BRFG' }
     ],
-    [
-      '@vuepress/plugin-shiki',
-      { theme: 'nord', langs: [] }
-    ]
+    // [
+    //   '@vuepress/plugin-shiki',
+    //   { theme: 'nord', langs: [] }
+    // ]
   ]
 }

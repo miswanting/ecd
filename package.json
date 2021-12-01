@@ -7,10 +7,10 @@
   "author": "Miswanting <ihex@foxmail.com>",
   "license": "GPL-3.0+",
   "scripts": {
-    "init": "yarn",
-    "docs:dev": "yarn vuepress dev docs",
-    "docs:build": "yarn vuepress build docs",
-    "docs:serve": "yarn vitepress serve docs"
+    "init": "pnpm i",
+    "docs:dev": "pnpm vuepress dev docs",
+    "docs:build": "pnpm vuepress build docs",
+    "docs:serve": "pnpm vitepress serve docs"
   },
   "devDependencies": {
     "@vuepress/plugin-google-analytics": "next",

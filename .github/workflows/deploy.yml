@@ -26,8 +26,8 @@ jobs:
       - name: Build Document
         run: |
           cd documentation
-          yarn
-          yarn run docs:build
+          pnpm i
+          pnpm run docs:build
           cd ..
           mv documentation/docs/.vuepress/dist dist
           rm -r documentation

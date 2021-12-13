@@ -1,0 +1,1 @@
+const e={key:"v-fcac1fc6",path:"/reference/Config_File.html",title:"Config \u6587\u4EF6\u53C2\u8003",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],filePathRelative:"reference/Config_File.md",git:{updatedTime:1639371673e3,contributors:[{name:"Miswanting",email:"ihex@foxmail.com",commits:1}]}};export{e as data};

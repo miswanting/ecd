@@ -7,7 +7,7 @@
   "author": "Miswanting <ihex@foxmail.com>",
   "license": "GPL-3.0+",
   "scripts": {
-    "init": "pnpm i",
+    "init": "pnpm install",
     "docs:dev": "pnpm vuepress dev docs",
     "docs:build": "pnpm vuepress build docs",
     "docs:serve": "pnpm vitepress serve docs"

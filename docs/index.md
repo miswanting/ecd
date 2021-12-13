@@ -38,7 +38,13 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 
 # 项目进度
 
-[![Deploy GitHub Pages](https://github.com/miswanting/ecd/actions/workflows/deploy.yml/badge.svg)](https://github.com/miswanting/ecd/actions/workflows/deploy.yml)
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/miswanting/ecd/Deploy%20GitHub%20Pages/dev?style=flat-square)](https://github.com/miswanting/ecd/actions/workflows/deploy.yml)
+
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/miswanting/ecd/dev?style=flat-square)](https://github.com/miswanting/ecd/commits/dev)
+[![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/miswanting/ecd/dev?style=flat-square)](https://github.com/miswanting/ecd/commits/dev)
+
+[![GitHub issues](https://img.shields.io/github/issues/miswanting/ecd?style=flat-square)](https://github.com/miswanting/ecd/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/miswanting/ecd?style=flat-square)](https://github.com/miswanting/ecd/pulls)
 
 ## 第一步：翻译部分
 

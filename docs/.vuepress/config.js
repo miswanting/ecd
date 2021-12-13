@@ -168,5 +168,6 @@ module.exports = {
     //   '@vuepress/plugin-shiki',
     //   { theme: 'nord', langs: [] }
     // ]
-  ]
+  ],
+  port: 80,
 }

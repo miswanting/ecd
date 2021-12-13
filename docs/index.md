@@ -46,6 +46,8 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/miswanting/ecd?style=flat-square)](https://github.com/miswanting/ecd/pulls)
 [![GitHub Discussions](https://img.shields.io/github/discussions/miswanting/ecd?style=flat-square)](https://github.com/miswanting/ecd/discussions)
 
+[![GitHub Repo stars](https://img.shields.io/github/stars/miswanting/ecd?style=social)](https://github.com/miswanting/ecd)
+
 ## 第一步：翻译部分
 
 1. EraMaker 部分

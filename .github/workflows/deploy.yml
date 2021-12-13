@@ -16,6 +16,8 @@ jobs:
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.6
 
       - name: Try Checkout Github Pages Branch
         continue-on-error: true

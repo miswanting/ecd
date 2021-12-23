@@ -78,6 +78,7 @@ module.exports = {
                 '/guide/tutorials/Variable',
                 '/guide/tutorials/Type',
                 '/guide/tutorials/IO',
+                '/guide/tutorials/Summary1',
               ]
             },
           ]
@@ -103,6 +104,7 @@ module.exports = {
             '/reference/ERB_Structure',
             '/reference/ERB_Variables',
             '/reference/ERB_Expressions',
+            '/reference/ERB_Commands',
             '/reference/ERB_Statements',
             '/reference/ERB_Compound_Statements',
             '/reference/ERB_Internal_Process',

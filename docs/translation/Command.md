@@ -5,6 +5,8 @@ import PrintCommandChooser from './PrintCommandChooser.vue'
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/excom
 
+也可跳转至：[风飏@df32翻译版](Command-df32)
+
 ## Print系
 
 ### Print 系命令辅助选择器

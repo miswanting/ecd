@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/EmuDic
 
+也可跳转至：[风飏@df32翻译版](Glossary-df32)
+
 ## 启动模式
 
 ### 普通模式 Normal Mode

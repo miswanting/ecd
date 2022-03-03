@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/exfunc
 
+也可跳转至：[风飏@df32翻译版](Function_and_Preprocessor-df32)
+
 ## 函数
 
 ### @EVENTLOAD

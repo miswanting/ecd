@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/exop
 
+也可跳转至：[风飏@df32翻译版](Operator-df32)
+
 ## 运算符
 
 ### 单项运算符

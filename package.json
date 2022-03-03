@@ -8,16 +8,16 @@
   "license": "GPL-3.0+",
   "scripts": {
     "init": "pnpm install",
-    "update": "pnpm up",
+    "update": "pnpm update",
     "docs:dev": "pnpm vuepress dev docs",
     "docs:build": "pnpm vuepress build docs",
     "docs:serve": "pnpm vitepress serve docs"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "next",
-    "@vuepress/plugin-register-components": "next",
-    "@vuepress/plugin-shiki": "next",
-    "pug": "latest",
-    "vuepress-vite": "next"
+    "@vuepress/plugin-google-analytics": "^2.0.0-beta.36",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.36",
+    "@vuepress/plugin-shiki": "^2.0.0-beta.36",
+    "pug": "^3.0.2",
+    "vuepress-vite": "^2.0.0-beta.36"
   }
 }

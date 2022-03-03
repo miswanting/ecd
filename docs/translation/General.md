@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/exetc
 
+也可跳转至：[风飏@df32翻译版](General-df32)
+
 ## 行末注释
 
 ```

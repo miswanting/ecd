@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/debugcom
 
+也可跳转至：[风飏@df32翻译版](Debug_Command-df32)
+
 调试命令在默认情况下是不可用的。
 
 如果你想使用它们，请在帮助设置中选中 "使用调试命令"。

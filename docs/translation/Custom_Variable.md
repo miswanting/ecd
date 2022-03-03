@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/UserVars
 
+也可跳转至：[风飏@df32翻译版](Custom_Variable-df32)
+
 `#DIM`和`#DIMS`可以用来定义任何你喜欢的变量。
 
 在一个函数中定义的变量成为私有变量，只能在该函数中使用，而在[头文件（ERH）]()中定义的变量成为广域变量，可以从ERB的所有部分引用。

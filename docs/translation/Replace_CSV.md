@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/replace
 
+也可跳转至：[风飏@df32翻译版](Replace_CSV-df32)
+
 ### _replace.csv
 
 通过在`CSV/`文件夹中放置一个名为`_replace.csv`的文件，你可以配置与显示有关的设置。

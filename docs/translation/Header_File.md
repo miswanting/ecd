@@ -2,6 +2,8 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/ERH
 
+也可跳转至：[风飏@df32翻译版](Header_File-df32)
+
 除了扩展名为`ERB`的文件外，ERB文件夹还可以包含扩展名为`ERH`的文件。
 
 `ERH`文件包含必须在`ERB`之前处理的信息，即用`#DIM`和`#DIMS`定义广域变量，用`#DEFINE`定义宏。

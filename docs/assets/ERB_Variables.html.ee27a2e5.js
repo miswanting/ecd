@@ -1,1 +1,0 @@
-const e={key:"v-543d66e9",path:"/reference/ERB_Variables.html",title:"ERB \u7684\u53D8\u91CF",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1646312007e3,contributors:[{name:"Miswanting",email:"ihex@foxmail.com",commits:1}]},filePathRelative:"reference/ERB_Variables.md"};export{e as data};

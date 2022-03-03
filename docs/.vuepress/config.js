@@ -28,11 +28,11 @@ module.exports = {
         text: '翻译',
         children: [
           {
-            text: 'EraMaker',
+            text: 'EraMaker文档翻译',
             link: '/translation/#eramaker-部分',
           },
           {
-            text: 'Emuera',
+            text: 'Emuera文档翻译',
             link: '/translation/#emuera-部分',
           },
         ]

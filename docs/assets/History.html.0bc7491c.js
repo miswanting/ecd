@@ -1,0 +1,1 @@
+const t={key:"v-ad4eb85e",path:"/guide/History.html",title:"Era \u7CFB\u5217\u5386\u53F2",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1646316908e3,contributors:[{name:"\u59EC\u98DE\u96E8",email:"453542772@qq.com",commits:1}]},filePathRelative:"guide/History.md"};export{t as data};

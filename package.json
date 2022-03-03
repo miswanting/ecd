@@ -8,6 +8,7 @@
   "license": "GPL-3.0+",
   "scripts": {
     "init": "pnpm install",
+    "update": "pnpm up",
     "docs:dev": "pnpm vuepress dev docs",
     "docs:build": "pnpm vuepress build docs",
     "docs:serve": "pnpm vitepress serve docs"

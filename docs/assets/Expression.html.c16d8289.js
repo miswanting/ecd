@@ -1,0 +1,1 @@
+import{o as e,c as t,a as o}from"./app.840b3997.js";import{_ as s}from"./plugin-vue_export-helper.21dcd24c.js";const r={},c=o("p",null,"\u7FFB\u8BD1\u81EA\u539F\u6587\u6863\uFF1Ahttps://osdn.net/projects/emuera/wiki/exmeth",-1),n=[c];function a(_,l){return e(),t("blockquote",null,n)}var p=s(r,[["render",a]]);export{p as default};

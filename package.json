@@ -2,10 +2,14 @@
   "name": "era-chinese-documentation",
   "version": "0.1.0",
   "description": "做便捷至极的 Emuera + Eramaker + Erabasic 文档。",
-  "main": "",
-  "repository": "https://github.com/miswanting/ecd.git",
   "author": "Miswanting <ihex@foxmail.com>",
   "license": "GPL-3.0+",
+  "main": "",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miswanting/ecd.git"
+  },
   "scripts": {
     "init": "pnpm install",
     "update": "pnpm update",
@@ -17,7 +21,9 @@
     "@vuepress/plugin-google-analytics": "^2.0.0-beta.36",
     "@vuepress/plugin-register-components": "^2.0.0-beta.36",
     "@vuepress/plugin-shiki": "^2.0.0-beta.36",
+    "lodash.debounce": "^4.0.8",
     "pug": "^3.0.2",
-    "vuepress-vite": "^2.0.0-beta.36"
+    "vuepress": "^2.0.0-beta.36",
+    "vuepress-plugin-md-enhance": "^2.0.0-beta.27"
   }
 }

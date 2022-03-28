@@ -34,14 +34,23 @@ import FlowTitle from './FlowTitle.vue'
 
 若未定义，则显示默认加载界面。该界面与`@LoadGame`所调用的界面略有不同。
 
-## First 从头开始流程
+## First `从头开始`流程
 
 流程进入方式：
 
 - 自动：在标题界面选择了`[0]从头开始`后，自动进入；
 - 手动：使用`Begin First`语句手动进入。
 
-![](https://osdn.net/projects/emuera/wiki/flow/attach/first.gif)
+> https://osdn.net/projects/emuera/wiki/flow/attach/first.gif
+
+```flow
+start=>start: First
+event_first=>subroutine: @EventFirst
+end=>end: Error
+start->event_first->end
+```
+
+
 
 如果`@EventFirst`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
@@ -149,7 +158,27 @@ Emuera 的`NextCom`是为了兼容旧代码而设计的，包括上述的 Bug，
 
 - 手动：使用`Begin AblUp`语句手动进入。
 
-![](https://osdn.net/projects/emuera/wiki/flow/attach/ablup.gif)
+> https://osdn.net/projects/emuera/wiki/flow/attach/ablup.gif
+
+```flow
+start=>start: AblUp
+show_juel=>subroutine: @Show_Juel
+show_abl_up_select=>subroutine: @Show_AblUp_Select
+user_abl_up=>subroutine: @UserAblUp
+abl_up=>subroutine: @AblUp##
+input=>inputoutput: Input
+input_result=>condition: Input Result in [0]~[99]
+exist_abl_up=>condition: Exists @AblUp##
+end=>end: Error
+
+start->show_juel->show_abl_up_select->input->input_result
+input_result(yes)->exist_abl_up
+input_result(no)->user_abl_up(top)->show_juel
+exist_abl_up(yes)->abl_up->show_juel
+exist_abl_up(no,left)->input
+```
+
+
 
 调用`@Show_Juel`和`@Show_AblUp_Select`后等待用户输入。
 
@@ -175,7 +204,16 @@ Emuera 的`NextCom`是为了兼容旧代码而设计的，包括上述的 Bug，
 
 如果`@EventEnd`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
-![](https://osdn.net/projects/emuera/wiki/flow/attach/aftertrain.gif)
+> https://osdn.net/projects/emuera/wiki/flow/attach/aftertrain.gif
+
+```flow
+start=>start: AfterTrain
+event_end=>subroutine: @EventEnd
+end=>end: Error
+start->event_end->end
+```
+
+
 
 ## TurnEnd
 
@@ -185,7 +223,16 @@ Emuera 的`NextCom`是为了兼容旧代码而设计的，包括上述的 Bug，
 
 如果`@EventTurnEnd`函数在`Return`之前，没有调用`Begin`命令，则会报错退出。
 
-![](https://osdn.net/projects/emuera/wiki/flow/attach/turnend.gif)
+> https://osdn.net/projects/emuera/wiki/flow/attach/turnend.gif
+
+```flow
+start=>start: TurnEnd
+event_turn_end=>subroutine: @EventTurnEnd
+end=>end: Error
+start->event_turn_end->end
+```
+
+
 
 ## LoadGame
 

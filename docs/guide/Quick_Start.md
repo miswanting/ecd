@@ -158,7 +158,7 @@ Now Loading
 
 修改`System.erb`：
 
-```basic
+```erb
 @EventFirst
   Print Hello World!
   Quit

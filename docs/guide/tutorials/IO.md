@@ -23,7 +23,7 @@ root/
 
 `System.erb`代码确认：
 
-```basic
+```erb
 @EventFirst
   Print Hello World!
   Quit

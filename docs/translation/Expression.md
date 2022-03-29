@@ -11,7 +11,7 @@ ERB脚本中，**函数**是指以 `@ ~ ~` 的形式定义，通过`CALL`命令�
 简单的说，式中函数是可以在表达式中使用的**函数**。
 
 下面演示了式中函数的使用：
-```
+```erb
 A = ABS(A)
 IF STRLENS(STR:0) > A
 	LOCALS:0 = %SUBSTRING(STR:0, A, 1)%
@@ -24,7 +24,7 @@ ENDIF
 则令`LOCALS:0`为`STR:0`的`A`位置以后的截取内容。
 
 若不使用式中函数，上面的脚本可以重写为下面：
-```
+```erb
 ABS A
 A = RESULT
 STRLENS STR:0
@@ -42,7 +42,7 @@ ENDIF
 
 以下内容解释了本文用到的一些符号。
 例如，
-``` clike
+```
 	int STRLENS(str s)
 	str SUBSTRING(str s, int start = 0, int length = -1)
 ```
@@ -50,7 +50,7 @@ ENDIF
 行首的`int`和`str`是式中函数的返回值类型。
 `int`是数值型，`str`是字符串型。
 下面脚本第一行是正确的，第二行是错误的。
-``` clike
+```erb
 	A = STRLENS("abc")
 	A = SUBSTRING("abc", 0, 1)
 	; 错误，试图为数值型变量赋予字符串型的值
@@ -71,7 +71,7 @@ ENDIF
 
 参数名字之后的 `=0` 表示这个参数可以省略，省略时使用的默认值。
 下面脚本每一行的意思都相同：
-``` clike
+```erb
 	STR = SUBSTRING(RESULTS)
 	STR = SUBSTRING(RESULTS, 0)
 	STR = SUBSTRING(RESULTS, , -1)
@@ -79,7 +79,7 @@ ENDIF
 ```
 
 也可以省略第一个参数。
-``` clike
+```erb
 	;int RAND(int min = 0, int max)
 	A = RAND(100)
 	A = RAND( , 100)
@@ -87,13 +87,13 @@ ENDIF
 ```
 
 除此之外，式中函数也可以没有参数。
-``` clike
+```
 	int GETTIME()
 ```
 
 虽然`GETTIME`没有参数，但是`()`是必须的。（为了区分变量和式中函数）
 
-``` clike
+```
 	int FINDCHARA(var key, ? value, int start = 0)
 ```
 这段脚本中，`var`表示变量类型。这里应当输入的是`TALENT`等变量。
@@ -101,12 +101,12 @@ ENDIF
 
 `FINDCHARA`中第二参数的类型是由第一参数决定的。
 
-``` clike
+```
 	int MAX(int n，int m ...)
 ```
 省略号表示不限制参数的数量。
 
-``` clike
+```erb
 	M = MAX(A，B，C，E，D，F，G）
 ```
 `M`将等于`A~G`中数值最大的变量。
@@ -117,7 +117,7 @@ ENDIF
 
 ## 内置式中函数一览
 
-``` clike
+```
 int GETCHARA(int no, int flag = 0)
 int GETSPCHARA(int no)
 int FINDCHARA(var key, ? value, int start = 0, int end = ※)

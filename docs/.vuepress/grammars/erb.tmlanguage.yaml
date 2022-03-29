@@ -1,0 +1,15 @@
+name: EraBasic
+scopeName: source.erb
+fileTypes:
+  - erh
+  - erb
+patterns:
+  - name: comment.line.semicolon.erb
+    begin: ;
+    end: $
+  - name: entity.name.function.erb
+    begin: "@"
+    end: $
+  - name: keyword.operator.erb
+    begin: "PrintVL"
+    end: $

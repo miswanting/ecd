@@ -71,7 +71,7 @@ import PrintCommandChooser from './PrintCommandChooser.vue'
 
 ### PrintData(|K|D)(|L|W)
 
-```basic
+```erb
 PrintData(数値変数：省略可)
 Data(文字)
 DataForm(Form文字列)

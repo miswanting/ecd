@@ -25,7 +25,7 @@ root/
 
 其中，`System.erb`的代码为：
 
-```basic
+```erb
 @EventFirst
   Print Hello World!
   Quit
@@ -35,7 +35,7 @@ root/
 
 首先，我们举一个很日常的例子：我的包里有3个石头，我把石头的数量打印到屏幕上：`Print 3`。同时、我包里还有3个苹果，我把苹果的数量也打印到屏幕上：`Print 3`，这样我们就得到一个脚本：
 
-```basic{2-3}
+```erb{2-3}
 @EventFirst
   Print 3
   Print 3
@@ -54,19 +54,19 @@ root/
 
 我们可以产生一个名称为`Stone`的容器，并将数值`3`装进去。用脚本表示就像这样：
 
-```basic
+```erb
 #Dim Stone = 3
 ```
 
 同理，苹果可以这样表示：
 
-```basic
+```erb
 #Dim Apple = 3
 ```
 
 这样，我们前面的脚本就可以等效于：
 
-```basic{2-5}
+```erb{2-5}
 @EventFirst
   #Dim Stone = 3
   #Dim Apple = 3
@@ -98,7 +98,7 @@ Stone3
 
 修改石头的值，得到完整脚本：
 
-```basic{4}
+```erb{4}
 @EventFirst
   #Dim Stone = 3
   #Dim Apple = 3
@@ -165,7 +165,7 @@ Stone3
 
 定义常量十分简单，完整脚本如下：
 
-```basic
+```erb
 @EventFirst
   #Dim Const Stone = 0
   PrintV Stone
@@ -178,7 +178,7 @@ Stone3
 
 ::: warning 该代码含有可期待的错误
 
-```basic
+```erb
 @EventFirst
 #Dim Const Stone = 0
   Stone = 1

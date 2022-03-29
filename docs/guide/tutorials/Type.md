@@ -27,7 +27,7 @@ root/
 
 `System.erb`代码确认：
 
-```basic
+```erb
 @EventFirst
   Print Hello World!
   Quit
@@ -49,7 +49,7 @@ root/
 
 后面加个 **S**，就是定义字符串的了，比如：
 
-```basic
+```erb
 @EventFirst
 #DimS Text = "Hello World!"
   Quit

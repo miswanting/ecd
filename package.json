@@ -13,16 +13,20 @@
   "scripts": {
     "init": "pnpm install",
     "update": "pnpm update",
-    "docs:dev": "pnpm vuepress dev docs",
-    "docs:build": "pnpm vuepress build docs",
-    "docs:serve": "pnpm vitepress serve docs"
+    "docs:build": "node scripts/prelude.js && pnpm vuepress build docs",
+    "docs:clean": "pnpm rimraf pnpm-lock.yaml node_modules docs/.vuepress/.temp docs/.vuepress/.cache docs/.vuepress/dist",
+    "docs:dev": "node scripts/prelude.js && pnpm vuepress dev docs",
+    "docs:serve": "node scripts/prelude.js && pnpm vitepress serve docs"
   },
   "devDependencies": {
+    "@rollup/plugin-yaml": "^3.1.0",
     "@vuepress/plugin-google-analytics": "^2.0.0-beta.36",
     "@vuepress/plugin-register-components": "^2.0.0-beta.36",
     "@vuepress/plugin-shiki": "^2.0.0-beta.36",
+    "js-yaml": "^4.1.0",
     "lodash.debounce": "^4.0.8",
     "pug": "^3.0.2",
+    "rimraf": "^3.0.2",
     "vuepress": "^2.0.0-beta.36",
     "vuepress-plugin-md-enhance": "^2.0.0-beta.27"
   }

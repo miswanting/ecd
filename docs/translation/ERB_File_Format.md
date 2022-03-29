@@ -24,7 +24,7 @@
 
 ::: tip 正确
 
-```sh
+```erb
 ;资金设置
 MONEY = 500
     ;时间设置
@@ -38,7 +38,7 @@ PRINT 做什么？
 
 ::: warning 错误
 
-```sh
+```erb
 MONEY = 500;
 TIME = 5;（从第5天开始）
 ```
@@ -51,7 +51,7 @@ TIME = 5;（从第5天开始）
 
 ::: tip 正确
 
-```sh
+```erb
 MONEY = 500
 PRINT 开始游戏。
 ```
@@ -60,7 +60,7 @@ PRINT 开始游戏。
 
 ::: warning 错误
 
-```sh
+```erb
 ＭＯＮＥＹ　＝　５００
 ＰＲＩＮＴ 开始游戏。
 ```
@@ -73,7 +73,7 @@ PRINT 开始游戏。
 
 ::: tip 正确
 
-```sh
+```erb
 PRINT 这一天结束了……
 ```
 
@@ -81,7 +81,7 @@ PRINT 这一天结束了……
 
 ::: warning 错误
 
-```sh
+```erb
 PRINT "这一天结束了……"
 ```
 
@@ -93,7 +93,7 @@ PRINT "这一天结束了……"
 
 ::: tip 正确
 
-```sh
+```erb
 PRINT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
 ```
 
@@ -101,7 +101,7 @@ PRINT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod te
 
 ::: warning 错误
 
-```sh
+```erb
 PRINT Lorem ipsum dolor sit amet,
 consectetur adipiscing elit,
 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -127,7 +127,7 @@ EraMaker中可以使用的数字基本都是整数。 不要输入小数。
 
 ::: tip 正确
 
-```sh
+```erb
 MONEY = 500
 ```
 
@@ -135,7 +135,7 @@ MONEY = 500
 
 ::: warning 错误
 
-```sh
+```erb
 MONEY ＝ 500
 MONEY=500
 MONEY = 3.14
@@ -151,7 +151,7 @@ MONEY = 3.14
 
 ::: tip 正确
 
-```sh
+```erb
 ;MONEY的值为74
 MONEY = 15+34+25
 ;MONEY的值为650
@@ -168,7 +168,7 @@ MONEY = DAY%7*10
 
 ::: warning 错误
 
-```sh
+```erb
 MONEY = 500×10÷4
 ```
 
@@ -178,7 +178,7 @@ MONEY = 500×10÷4
 
 ::: tip 示例
 
-```sh
+```erb
 MONEY = 100
 TIME = 12
 ;MONEY的值为150
@@ -212,7 +212,7 @@ MONEY /= TIME-4
 
 ::: tip 正确
 
-```sh
+```erb
 A = 35
 ;为数组FLAG赋值
 FLAG:0 = 0
@@ -227,7 +227,7 @@ FLAG:2 *= FLAG:A
 
 ::: warning 错误
 
-```sh
+```erb
 FLAG：0 = 10
 FLAG : 52 = 1000
 FLAG:FLAG:20 = 10000
@@ -248,7 +248,7 @@ FLAG:91881816 = 1
 
 示例：
 
-```sh
+```erb
 A = 2 ;让第5个角色的第0种能力升到3级。
 ABL:5:0 = 3
 ;让第A个(第2个)角色的第1种经验+2。
@@ -287,7 +287,7 @@ PRINTVL B
 
 ::: tip 正确
 
-```sh
+```erb
 STR:0 = 测试文字
 PRINTSL STR:0
 ```
@@ -296,7 +296,7 @@ PRINTSL STR:0
 
 ::: warning 错误
 
-```sh
+```erb
 ;无法对字符串变量使用+=
 STR:0 += 测试文字
 ```
@@ -325,7 +325,7 @@ STR:0 += 测试文字
 
 ::: tip 正确
 
-```sh
+```erb
 PRINT 这是一个测试。
 SIF 3 == 1+2
     PRINT 这很明显。
@@ -336,7 +336,7 @@ WAIT
 
 ::: warning 错误
 
-```sh
+```erb
 PRINT这是一个测试。
 ;等待输入
 WAIT 0

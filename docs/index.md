@@ -26,6 +26,21 @@ features:
 footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 ---
 
+::: tip 更新简报
+
+本次更新新增特性：针对 EraBasic 代码的语法高亮！
+
+```erb
+@EventFirst
+  ;Test
+  PrintVL hahah
+  Quit
+```
+
+语法高亮数据尚不完整，请期待后续更新……
+
+:::
+
 ::: warning 提示
 
 本文档正在**加急**制作中。

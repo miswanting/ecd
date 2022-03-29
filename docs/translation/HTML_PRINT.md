@@ -194,7 +194,7 @@
 
 ### HTML_TAGSPLIT
 
-```basic
+```erb
 HTML_TAGSPLIT <字符串表达式>(, <数值变量>, <字符串变量>)
 ```
 

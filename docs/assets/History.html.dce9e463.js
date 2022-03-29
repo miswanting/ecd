@@ -1,1 +1,0 @@
-const t={key:"v-ad4eb85e",path:"/guide/History.html",title:"Era \u7CFB\u5217\u5386\u53F2",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1648559194e3,contributors:[{name:"Miswanting",email:"453542772@qq.com",commits:1}]},filePathRelative:"guide/History.md"};export{t as data};

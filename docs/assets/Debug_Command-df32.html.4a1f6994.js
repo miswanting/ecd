@@ -1,1 +1,0 @@
-const t={key:"v-0f69d0f3",path:"/translation/Debug_Command-df32.html",title:"\u8C03\u8BD5\u547D\u4EE4\uFF08\u98CE\u98CF@df32\u7FFB\u8BD1\u7248\uFF09",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1648559194e3,contributors:[{name:"Miswanting",email:"453542772@qq.com",commits:1}]},filePathRelative:"translation/Debug_Command-df32.md"};export{t as data};

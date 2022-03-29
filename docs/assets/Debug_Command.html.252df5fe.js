@@ -1,1 +1,0 @@
-const t={key:"v-808f271e",path:"/translation/Debug_Command.html",title:"\u8C03\u8BD5\u547D\u4EE4",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1648473043e3,contributors:[{name:"Miswanting",email:"453542772@qq.com",commits:1}]},filePathRelative:"translation/Debug_Command.md"};export{t as data};

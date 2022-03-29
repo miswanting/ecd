@@ -64,7 +64,7 @@ export default defineUserConfig<DefaultThemeOptions>({
     }), [
       '@vuepress/plugin-shiki',
       {
-        theme: 'github-dark',
+        theme: 'slack-dark',
         langs: [EraBasic, CSV, 'html']
       }
     ], [

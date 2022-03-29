@@ -97,7 +97,7 @@ Now Loading
 
 ::: warning 该代码含有可期待的错误
 
-```
+```erb
 @EventFirst
 ```
 
@@ -117,7 +117,7 @@ Now Loading
 
 修改`System.erb`：
 
-```
+```erb
 @EventFirst
   Quit
 ```

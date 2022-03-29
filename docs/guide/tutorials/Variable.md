@@ -81,7 +81,7 @@ root/
 
 简单举例：
 
-```
+```erb
 Print Stone
 PrintV Stone
 ```

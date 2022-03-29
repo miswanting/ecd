@@ -37,8 +37,6 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
   Quit
 ```
 
-语法高亮数据尚不完整，请期待后续更新……
-
 :::
 
 ::: warning 提示

@@ -2,8 +2,6 @@
 
 > 翻译自原文档：https://osdn.net/projects/emuera/wiki/exmeth
 
-译者：[风飏@df32](https://github.com/df32)
-
 Emuera 1.712追加了新的语法，被称为**式中函数**，或者叫“方法”（Method）。
 
 ERB脚本中，**函数**是指以 `@ ~ ~` 的形式定义，通过`CALL`命令来调用的东西。

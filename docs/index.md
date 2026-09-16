@@ -81,7 +81,7 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
      - :yellow_circle:`直译`[运算符](translation/Operator)
      - :yellow_circle:`直译`[常量与变量](translation/Variable)
      - :yellow_circle:`直译`[用户自定义变量](translation/Custom_Variable)
-     - :yellow_circle:`直译`[命令](translation/Command)
+     - :green_circle:`直译`[命令](translation/Command)
      - :yellow_circle:`直译`[函数与预处理器](translation/Function_and_Preprocessor)
      - :yellow_circle:`直译`[表达式函数](translation/Expression)
      - :yellow_circle:`直译`[自定义表达式内函数](translation/Custom_Expression)

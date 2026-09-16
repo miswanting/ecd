@@ -75,7 +75,7 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
    - :green_circle:`直译`[\_replace.csv](translation/Replace_CSV)
    - :green_circle:`直译`[强制配置项目](translation/Config)
    - :green_circle:`直译`[程序流程](translation/Flow)
-   - :yellow_circle:`直译`[与 EraMaker 的差异](translation/Difference)
+   - :green_circle:`直译`[与 Eramaker 的差异](translation/Difference)
    - :yellow_circle:`直译`新增的扩展语法
      - :yellow_circle:`直译`[常规](translation/General)
      - :yellow_circle:`直译`[运算符](translation/Operator)

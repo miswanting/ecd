@@ -79,7 +79,7 @@ x、y、宽度和高度可以省略，在这种情况下，将使用整个图像
 
 你可以通过执行`SETANIMETIMER`指令告诉 Emuera 在`INPUT`期间重绘。
 
-关于`SETANIMETIMER`指令的更多信息，请参见[指令说明]()。
+关于`SETANIMETIMER`指令的更多信息，请参见指令说明。
 
 ## 图像文件
 

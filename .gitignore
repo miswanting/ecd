@@ -1,8 +1,31 @@
-.vscode/
+# 本地只读参考工程（原始实现快照，不纳入版本控制）
+.ref/
+
+# 依赖
 node_modules/
+
+# VuePress 构建产物与缓存
 docs/.vuepress/.cache/
 docs/.vuepress/.temp/
 docs/.vuepress/dist/
-*lock*
-*.json
+
+# 由 scripts/prelude.js 从 erb.tmlanguage.yaml 生成，勿提交
+docs/.vuepress/grammars/*.json
+
+# 锁文件应当提交，以保证构建可复现（因此不忽略 *lock*）
+# pnpm-lock.yaml
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+
+# 日志
 *.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+
+# 操作系统
+.DS_Store
+Thumbs.db

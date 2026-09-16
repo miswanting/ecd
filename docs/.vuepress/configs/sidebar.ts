@@ -114,6 +114,11 @@ export const sidebar: SidebarOptions = {
   '/spec/': [
     '/spec/EraBasic',
   ],
+  '/development/': [
+    '/development/',
+    '/development/Emuera',
+    '/development/EraMaker',
+  ],
   '/contribute/': [
     '/contribute/',
     '/contribute/Documentation_Standard',

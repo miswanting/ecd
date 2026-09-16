@@ -41,6 +41,10 @@ export const navbar: NavbarOptions = [
     ]
   },
   {
+    text: '开发',
+    link: '/development/',
+  },
+  {
     text: '生态',
     link: '/ecosystem/',
   },

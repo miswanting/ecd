@@ -16,7 +16,16 @@ export const navbar: NavbarOptions = [
   },
   {
     text: '参考',
-    link: '/reference/',
+    children: [
+      {
+        text: '参考目录',
+        link: '/reference/',
+      },
+      {
+        text: 'EraBasic 语言参考手册',
+        link: '/spec/EraBasic',
+      },
+    ]
   },
   {
     text: '翻译',

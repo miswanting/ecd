@@ -1,5 +1,11 @@
 # 参考目录
 
+::: warning 提示
+
+参考部分仍在制作中，多数页面尚为空缺，内容会陆续补全。
+
+:::
+
 1. Config 文件
    1. [emuera.config](Config_File)
 2. CSV 文件

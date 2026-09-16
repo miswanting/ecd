@@ -4,7 +4,7 @@
 
 译者：[风飏@df32](https://github.com/df32)
 
-也可跳转至：[原版](Command)
+也可跳转至：[原版](Custom_Variable)
 
 预处理指令`#DIM`和`#DIM`用来声明变量。
 

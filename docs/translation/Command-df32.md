@@ -7,7 +7,7 @@ import PrintCommandChooser from './PrintCommandChooser.vue'
 
 译者：[风飏@df32](https://github.com/df32)
 
-也可跳转至：[原版](Custom_Variable)
+也可跳转至：[原版](Command)
 
 ## 值类型规范
 

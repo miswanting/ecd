@@ -15,15 +15,10 @@ export const sidebar: SidebarOptions = {
             '/guide/tutorials/Type',
             '/guide/tutorials/IO',
             '/guide/tutorials/Summary1',
+            '/guide/tutorials/Operation',
           ]
         },
       ]
-    },
-    {
-      text: '进阶篇',
-    },
-    {
-      text: '高级篇',
     },
   ],
   '/reference/': [

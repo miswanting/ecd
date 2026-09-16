@@ -25,7 +25,7 @@
    4. [用户自定义变量](Custom_Variable)
    5. [命令](Command)
    6. [函数与预处理器](Function_and_Preprocessor)
-   7. [表达式函数](Expression)
+   7. [表达式内函数](Expression)
    8. [用户自定义的表达式内函数](Custom_Expression)
    9. [头文件](Header_File)
    10. [HTML_PRINT相关](HTML_PRINT)

@@ -303,7 +303,7 @@ NOWEX:0指Ｃ；NOWEX:1指Ｖ；NOWEX:2指Ａ。
 
 #### NOITEM
 
-如果GameBase.csv中`アイテムなし`项为1，则忽略训练命令中的物品判定。
+如果GameBase.csv中`アイテムなし`项为1，则忽略训练命令中的物品判断。
 
 #### PBAND
 

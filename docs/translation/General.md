@@ -196,7 +196,7 @@ TFLAG (tflag.csv)
 CFLAG (cflag.csv)
 STR (strname.csv)
 SAVESTR (savestr.csv)
-;以下为 Emuera 追加的变量
+;以下为 Emuera 新增的变量
 ITEMPRICE (item.csv)
 DOWNBASE (base.csv)
 CUP (palam.csv)
@@ -307,7 +307,7 @@ PRINTFORML [%STR:0,2%]
 
 ## 在字符串表达式中使用格式化的字符串（FORM 语法）
 
-在字符串表达式中直接使用 FORM 语法（例如作为 `PRINTS` 的参数，或作为式中用户定义函数的参数）会导致错误。
+在字符串表达式中直接使用 FORM 语法（例如作为 `PRINTS` 的参数，或作为表达式内用户定义函数的参数）会导致错误。
 
 因此，在字符串表达式中使用格式化字符串时，可以像在字符串表达式中使用字符串常量那样，用 `@"～"` 来书写。
 

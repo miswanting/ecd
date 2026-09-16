@@ -11,23 +11,26 @@
     "url": "git+https://github.com/miswanting/ecd.git"
   },
   "scripts": {
-    "init": "pnpm install",
-    "update": "pnpm update",
-    "docs:build": "node scripts/prelude.js && pnpm vuepress build docs",
+    "docs:build": "node scripts/prelude.js && vuepress-vite build docs",
     "docs:clean": "pnpm rimraf pnpm-lock.yaml node_modules docs/.vuepress/.temp docs/.vuepress/.cache docs/.vuepress/dist",
-    "docs:dev": "node scripts/prelude.js && pnpm vuepress dev docs",
+    "docs:dev": "node scripts/prelude.js && vuepress-vite dev docs",
     "docs:serve": "node scripts/prelude.js && pnpm vitepress serve docs"
   },
   "devDependencies": {
-    "@rollup/plugin-yaml": "^3.1.0",
-    "@vuepress/plugin-google-analytics": "^2.0.0-beta.36",
-    "@vuepress/plugin-register-components": "^2.0.0-beta.36",
-    "@vuepress/plugin-shiki": "^2.0.0-beta.36",
-    "js-yaml": "^4.1.0",
+    "@rollup/plugin-yaml": "^5.0.0",
+    "@vuepress/bundler-vite": "2.0.0-rc.31",
+    "@vuepress/plugin-google-analytics": "^2.0.0-rc.134",
+    "@vuepress/plugin-markdown-chart": "^2.0.0-rc.134",
+    "@vuepress/plugin-register-components": "^2.0.0-rc.134",
+    "@vuepress/plugin-shiki": "^2.0.0-rc.134",
+    "@vuepress/theme-default": "^2.0.0-rc.134",
+    "flowchart.ts": "^3.0.1",
+    "js-yaml": "^5.4.2",
     "lodash.debounce": "^4.0.8",
-    "pug": "^3.0.2",
-    "rimraf": "^3.0.2",
-    "vuepress": "^2.0.0-beta.36",
-    "vuepress-plugin-md-enhance": "^2.0.0-beta.27"
+    "pug": "^3.0.4",
+    "rimraf": "^6.1.3",
+    "sass-embedded": "^1.104.0",
+    "taze": "^21.1.0",
+    "vuepress": "^2.0.0-rc.31"
   }
 }

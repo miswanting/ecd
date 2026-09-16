@@ -6,8 +6,8 @@ export const sidebar: SidebarOptions = {
       text: '基础篇',
       children: [
         '/guide/',
-        '/guide/History',
         '/guide/Quick_Start',
+        '/guide/Emuera_Engine',
         {
           text: '入门教程',
           children: [
@@ -16,8 +16,34 @@ export const sidebar: SidebarOptions = {
             '/guide/tutorials/IO',
             '/guide/tutorials/Summary1',
             '/guide/tutorials/Operation',
+            '/guide/tutorials/Expression',
+            '/guide/tutorials/Statement',
+            '/guide/tutorials/Compound_Statement',
+            '/guide/tutorials/Function',
+            '/guide/tutorials/Save_Load',
+            '/guide/tutorials/Error',
+            '/guide/tutorials/System_Flow',
           ]
         },
+        {
+          text: '进阶教程',
+          children: [
+            '/guide/advanced/Character',
+          ]
+        },
+        {
+          text: '高级教程',
+          children: [
+            '/guide/advanced/Experience',
+          ]
+        },
+      ]
+    },
+    {
+      text: '附录',
+      children: [
+        '/guide/MCS',
+        '/guide/History',
       ]
     },
   ],

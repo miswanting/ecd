@@ -92,26 +92,26 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 ## 第二步：指南部分
 
 - :green_circle:`教程`[快速开始](guide/Quick_Start)
-- :yellow_circle:`教程`[入门教程](guide/tutorials/)
-  - :black_circle:`教程`Emuera 引擎的使用
+- :green_circle:`教程`[入门教程](guide/tutorials/)
+  - :green_circle:`教程`[Emuera 引擎的使用](guide/Emuera_Engine)
   - :green_circle:`教程`[常量与变量](guide/tutorials/Variable)
-  - :yellow_circle:`教程`[数值与文本](guide/tutorials/Type)
-  - :yellow_circle:`教程`[输入与输出](guide/tutorials/IO)
+  - :green_circle:`教程`[数值与文本](guide/tutorials/Type)
+  - :green_circle:`教程`[输入与输出](guide/tutorials/IO)
   - :green_circle:`教程`[小结1](guide/tutorials/Summary1)
-  - :yellow_circle:`教程`基本运算
-  - :black_circle:`教程`表达式
-  - :black_circle:`教程`简单语句
-  - :black_circle:`教程`复合语句
-  - :black_circle:`教程`函数的定义与用法
-  - :black_circle:`教程`游戏的保存与加载
-  - :black_circle:`教程`错误与异常
-  - :black_circle:`教程`内置流程
-- :black_circle:`教程`进阶教程
-  - :black_circle:`教程`角色的定义、注册、使用与注销
-- :black_circle:`教程`高级教程
-  - :black_circle:`教程`开发实战经验与技巧
-- :black_circle:`指南`MCS 代码风格介绍
-- :black_circle:`指南`Era 系列历史
+  - :green_circle:`教程`[基本运算](guide/tutorials/Operation)
+  - :green_circle:`教程`[表达式](guide/tutorials/Expression)
+  - :green_circle:`教程`[简单语句](guide/tutorials/Statement)
+  - :green_circle:`教程`[复合语句](guide/tutorials/Compound_Statement)
+  - :green_circle:`教程`[函数的定义与用法](guide/tutorials/Function)
+  - :green_circle:`教程`[游戏的保存与加载](guide/tutorials/Save_Load)
+  - :green_circle:`教程`[错误与异常](guide/tutorials/Error)
+  - :green_circle:`教程`[内置流程](guide/tutorials/System_Flow)
+- :green_circle:`教程`[进阶教程](guide/advanced/Character)
+  - :green_circle:`教程`[角色的定义、注册、使用与注销](guide/advanced/Character)
+- :green_circle:`教程`[高级教程](guide/advanced/Experience)
+  - :green_circle:`教程`[开发实战经验与技巧](guide/advanced/Experience)
+- :green_circle:`指南`[MCS 代码风格介绍](guide/MCS)
+- :green_circle:`指南`[Era 系列历史](guide/History)
 
 ## 第三步：参考部分
 

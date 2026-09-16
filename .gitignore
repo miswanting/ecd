@@ -9,6 +9,10 @@ docs/.vuepress/.cache/
 docs/.vuepress/.temp/
 docs/.vuepress/dist/
 
+# VitePress（并行迁移中）构建产物与缓存
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
 # 由 scripts/prelude.js 从 erb.tmlanguage.yaml 生成，勿提交
 docs/.vuepress/grammars/*.json
 

@@ -1,0 +1,11 @@
+:root {
+  /* brand colors */
+  --vp-c-brand-1: #7c00fb;
+  --vp-c-brand-2: #9549ff;
+}
+
+.dark {
+  /* brand colors */
+  --vp-c-brand-1: #d7baff;
+  --vp-c-brand-2: #c197ff;
+}

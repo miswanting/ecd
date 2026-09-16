@@ -257,6 +257,10 @@ REUSELASTLINE通常使用在INPUT、INPUTS的循环处理之中，处理用户�
 
 ## 显示处理·字体处理·显示方式参考
 
+### 颜色命令辅助选择器
+
+<ColorCommandChooser />
+
 ### SETCOLOR `<红>`, `<绿>`, `<蓝>`
 ### SETCOLOR `<RGB>`
 ### RESETCOLOR
@@ -1232,6 +1236,10 @@ SAVEDATA 15, RESULTS:0 + " " + @"{DAY+1}日目"
 
 ## 输入·等待
 
+### 输入系命令辅助选择器
+
+<InputCommandChooser />
+
 ### FORCEWAIT
 
 无法通过右键或宏跳过跳过的 `WAIT` 指令。
@@ -1542,6 +1550,10 @@ DOTRAIN X
 强制出错，并以参数给出的字符串显示错误。
 
 ## CALL·JUMP·GOTO系
+
+### CALL·JUMP·GOTO 系命令辅助选择器
+
+<CallCommandChooser />
 
 ### TRYJUMP `<字符串>` (, 参数1, 参数2……)
 

@@ -430,7 +430,7 @@ CSV文件包含以下项目：
 
 将当前角色对`arg1`所代表的角色的相性设置为`arg2`。
 
-`arg1`的取值应和[`CharaXX.csv`](#chaxx-csv的格式)文件编号相对应。
+`arg1`的取值应和[`CharaXX.csv`](#charaxx-csv的格式)文件编号相对应。
 
 结构如下：
 

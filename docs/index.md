@@ -115,18 +115,21 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 
 ## 第三步：参考部分
 
-- :black_circle:`参考`CSV 文件
-  - :black_circle:`参考`GameBase.csv
-  - :black_circle:`参考`Str.csv
-  - :black_circle:`参考`CharaXX.csv
-  - :black_circle:`参考`其他
-- :black_circle:`参考`ERB 文件
-  - :black_circle:`参考`文件结构
-  - :black_circle:`参考`变量
-  - :black_circle:`参考`表达式
-  - :black_circle:`参考`语句
-  - :black_circle:`参考`复合语句
-  - :black_circle:`参考`内置流程
+- :green_circle:`参考`[Config 文件](reference/Config_File)
+- :green_circle:`参考`[CSV 文件](reference/CSV_File)
+  - :green_circle:`参考`[GameBase.csv](reference/CSV_File#gamebase-csv)
+  - :green_circle:`参考`[Str.csv](reference/CSV_File#str-csv)
+  - :green_circle:`参考`[CharaXX.csv](reference/CSV_File#charaxx-csv)
+  - :green_circle:`参考`[其他](reference/CSV_File)
+- :green_circle:`参考`ERB 文件
+  - :green_circle:`参考`[文件结构](reference/ERB_Structure)
+  - :green_circle:`参考`[变量](reference/ERB_Variables)
+  - :green_circle:`参考`[表达式](reference/ERB_Expressions)
+  - :green_circle:`参考`[命令](reference/ERB_Commands)
+  - :green_circle:`参考`[语句](reference/ERB_Statements)
+  - :green_circle:`参考`[复合语句](reference/ERB_Compound_Statements)
+  - :green_circle:`参考`[内置流程](reference/ERB_Internal_Process)
+- :green_circle:`参考`[错误索引表](reference/Error_Index)
 
 ## 第四步：开发部分
 

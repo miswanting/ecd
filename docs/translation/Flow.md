@@ -24,7 +24,7 @@ import FlowTitle from './FlowTitle.vue'
 
 若没有定义`@System_Title`，就会执行后续的默认标题流程。
 
-默认标题中的文字，如标题、版本、介绍、命令按钮（如`[0]从头开始`）等，都可以被改变，详见 [_replace.csv](Replace_CSV#系统菜单0-系统菜单1)。
+默认标题中的文字，如标题、版本、介绍、命令按钮（如`[0]从头开始`）等，都可以被改变，详见 [_replace.csv](Replace_CSV#系统菜单)。
 
 在这个界面中，若选择`[0]从头开始`，首先要做的就是初始化数据。如`Str`和`PrintLV`的初始值（与`ResetData`命令同理），`AddChara 0`等。
 

@@ -7,7 +7,6 @@ export const sidebar: SidebarOptions = {
       children: [
         '/guide/',
         '/guide/History',
-        '/guide/Install',
         '/guide/Quick_Start',
         {
           text: '入门教程',
@@ -87,6 +86,12 @@ export const sidebar: SidebarOptions = {
         }
       ]
     },
+  ],
+  '/ecosystem/': [
+    '/ecosystem/',
+  ],
+  '/spec/': [
+    '/spec/EraBasic',
   ],
   '/contribute/': [
     '/contribute/',

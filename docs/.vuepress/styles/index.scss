@@ -1,11 +1,17 @@
 :root {
   // brand colors
-  --c-brand: #7C00FB;
-  --c-brand-light: #9549ff;
+  // VuePress 2 default theme exposes the accent palette through
+  // `--vp-c-accent*` variables (the old `--c-brand*` names are gone).
+  --vp-c-accent: #7c00fb;
+  --vp-c-accent-bg: #7c00fb;
+  --vp-c-accent-hover: #9549ff;
+  --vp-c-accent-soft: rgb(124 0 251 / 14%);
 }
 
-html.dark {
+[data-theme='dark'] {
   // brand colors
-  --c-brand: #d7baff;
-  --c-brand-light: #c197ff;
+  --vp-c-accent: #d7baff;
+  --vp-c-accent-bg: #7c00fb;
+  --vp-c-accent-hover: #9549ff;
+  --vp-c-accent-soft: rgb(124 0 251 / 16%);
 }

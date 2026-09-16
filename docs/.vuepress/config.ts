@@ -47,7 +47,13 @@ export default defineUserConfig({
     logo: "/favicon.svg",
     repo: "miswanting/ecd",
     navbar,
-    sidebar
+    sidebar,
+    // Shiki is used for syntax highlighting, so disable the theme's
+    // built-in prismjs highlighter to avoid double processing
+    // ("data-highlighter=prismjs" wrappers and duplicated line numbers).
+    themePlugins: {
+      prismjs: false
+    }
   }),
   plugins: [
     markdownChartPlugin({

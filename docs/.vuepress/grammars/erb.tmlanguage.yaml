@@ -1,6 +1,9 @@
-"$schema": https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
-name: EraBasic
-scopeName: source.erb
+# Emuera (EraBasic) TextMate grammar.
+# Syntax reference: Emuera C# sources (GameData/, GameProc/, Sub/).
+# Repository: https://github.com/miswanting/ecd
+$schema: "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json"
+name: "EraBasic"
+scopeName: "source.erb"
 patterns:
   - include: "#preprocessor"
   - include: "#statement"
@@ -8,236 +11,349 @@ patterns:
 repository:
   preprocessor:
     patterns:
+      - include: "#line-continuation"
+      - include: "#rename"
       - include: "#preprocessor-block"
       - include: "#preprocessor-special-comment"
-      - include: "#preprocessor-attribute"
-  preprocessor-block:
+      - include: "#preprocessor-directive"
+  "line-continuation":
+    begin: "^\\s*\\{\\s*$"
+    beginCaptures:
+      "0":
+        name: "meta.preprocessor.line-continuation.erabasic"
+    end: "^\\s*\\}\\s*$"
+    endCaptures:
+      "0":
+        name: "meta.preprocessor.line-continuation.erabasic"
     patterns:
-      - begin: "^\\s*(;[!#];)?\\s*\\[((?:IF|ELSEIF)\\s+[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+|IF_DEBUG|IF_NDEBUG|ELSE|ENDIF)\\]"
+      - include: "#comment"
+      - include: "#statement"
+      - include: "#expression"
+  rename:
+    patterns:
+      -
+        name: "meta.rename.erabasic"
+        match: "\\[\\[[^\\]\\n]*\\]\\]"
+  "preprocessor-block":
+    patterns:
+      -
+        name: "comment.block.erabasic"
+        begin: "(?:^|(?<=;))[ \\t]*\\[((?i:SKIPSTART))\\s*\\]"
         beginCaptures:
           "0":
-            name: meta.preprocessor.erabasic
-        end: "$"
-      - name: comment.block.erabasic
-        begin: "^\\s*(;[!#];)?\\s*\\[SKIPSTART\\]"
-        end: "^\\s*(;[!#];)?\\s*\\[SKIPEND\\]"
+            name: "meta.preprocessor.erabasic"
+          "1":
+            name: "keyword.control.directive.erabasic"
+        end: "(?:^|(?<=;))[ \\t]*\\[((?i:SKIPEND))\\s*\\]"
+        endCaptures:
+          "0":
+            name: "meta.preprocessor.erabasic"
+          "1":
+            name: "keyword.control.directive.erabasic"
+      -
+        match: "(?:^|(?<=;))[ \\t]*\\[((?i:IF|ELSEIF))\\s+([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)\\s*\\]"
         captures:
           "0":
-            name: meta.preprocessor.erabasic
-  preprocessor-special-comment:
+            name: "meta.preprocessor.erabasic"
+          "1":
+            name: "keyword.control.directive.erabasic"
+          "2":
+            name: "variable.other.macro.erabasic"
+      -
+        match: "(?:^|(?<=;))[ \\t]*\\[((?i:IF_DEBUG|IF_NDEBUG|ELSE|ENDIF))\\s*\\]"
+        captures:
+          "0":
+            name: "meta.preprocessor.erabasic"
+          "1":
+            name: "keyword.control.directive.erabasic"
+  "preprocessor-special-comment":
     patterns:
-      - begin: "^\\s*;[!#];"
+      -
+        begin: "^\\s*;[!#];"
         beginCaptures:
           "0":
-            name: meta.preprocessor.erabasic
+            name: "meta.preprocessor.erabasic"
         end: "$"
         patterns:
+          - include: "#preprocessor"
           - include: "#statement"
-  preprocessor-attribute:
+          - include: "#expression"
+  "preprocessor-directive":
     patterns:
-      - begin: "^\\s*#DIMS?(?:\\s+(?:SAVEDATA|CHARADATA|GLOBAL|DYNAMIC|STATIC|CONST|REF))*\\b"
-        beginCaptures:
-          "0":
-            name: meta.preprocessor.erabasic
-        end: "$"
-        patterns:
-          - include: "#expression"
-      - begin: "^\\s*#(?:SINGLE|PRI|LATER|ONLY|FUNCTION|FUNCTIONS|LOCALSIZE|LOCALSSIZE|DEFINE)\\b"
-        beginCaptures:
-          "0":
-            name: meta.preprocessor.erabasic
-        end: "$"
-        patterns:
-          - include: "#expression"
+      -
+        match: "(?:^|(?<=;))[ \\t]*#((?i:DEFINE))\\s+([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+        name: "meta.preprocessor.erabasic"
+        captures:
+          "1":
+            name: "keyword.control.directive.erabasic"
+          "2":
+            name: "entity.name.function.macro.erabasic"
+      -
+        match: "(?:^|(?<=;))[ \\t]*#((?i:DIM|DIMS))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])(\\s+)((?:(?i:CONST|REF|DYNAMIC|STATIC|GLOBAL|SAVEDATA|CHARADATA)(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])\\s+)*)([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+        name: "meta.preprocessor.erabasic"
+        captures:
+          "1":
+            name: "keyword.control.directive.erabasic"
+          "3":
+            patterns:
+              -
+                name: "storage.modifier.erabasic"
+                match: "(?i:CONST|REF|DYNAMIC|STATIC|GLOBAL|SAVEDATA|CHARADATA)(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+          "4":
+            name: "entity.name.variable.erabasic"
+      -
+        match: "(?:^|(?<=;))[ \\t]*#((?i:FUNCTION|FUNCTIONS|SINGLE|PRI|LATER|ONLY|LOCALSIZE|LOCALSSIZE))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        name: "meta.preprocessor.erabasic"
+        captures:
+          "1":
+            name: "keyword.control.directive.erabasic"
   statement:
     patterns:
       - include: "#comment"
+      - include: "#prefix-operator"
       - include: "#function-declaration"
       - include: "#labeled-statement"
       - include: "#control-statement"
+      - include: "#form-call-statement"
+      - include: "#call-statement"
+      - include: "#form-command-statement"
+      - include: "#print-command-statement"
+      - include: "#input-command-statement"
       - include: "#command-statement"
       - include: "#assignment-statement"
-  function-declaration:
+  comment:
     patterns:
-      - begin: "@([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+      -
+        name: "comment.line.semicolon.erabasic"
+        begin: ";"
+        beginCaptures:
+          "0":
+            name: "punctuation.definition.comment.erabasic"
+        end: "$"
+  "prefix-operator":
+    patterns:
+      -
+        name: "keyword.operator.increment.erabasic"
+        match: "(?:^|(?<=;))[ \\t]*(\\+\\+)"
+      -
+        name: "keyword.operator.decrement.erabasic"
+        match: "(?:^|(?<=;))[ \\t]*(--)"
+  "function-declaration":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*@(?:((?i:EVENTFIRST|EVENTTRAIN|EVENTSHOP|EVENTBUY|EVENTCOM|EVENTTURNEND|EVENTCOMEND|EVENTEND|EVENTLOAD))|((?i:SHOW_STATUS|SHOW_USERCOM|USERCOM|SOURCE_CHECK|CALLTRAINEND|SHOW_JUEL|SHOW_ABLUP_SELECT|USERABLUP|SHOW_SHOP|SAVEINFO|USERSHOP|TITLE_LOADGAME|SYSTEM_AUTOSAVE|SYSTEM_TITLE|SYSTEM_LOADEND)|(?i:(?:COM|COM_ABLE|ABLUP))[0-9]+))"
         beginCaptures:
           "1":
-            name: entity.name.function.erabasic
-        end: "(?=$)"
+            name: "entity.name.function.event.erabasic"
+          "2":
+            name: "entity.name.function.system.erabasic"
+        end: "$"
+        patterns:
+          - include: "#function-declaration-arguments"
+      -
+        begin: "(?:^|(?<=;))[ \\t]*@([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+        beginCaptures:
+          "1":
+            name: "entity.name.function.erabasic"
+        end: "$"
+        patterns:
+          - include: "#function-declaration-arguments"
+  "function-declaration-arguments":
+    patterns:
+      -
+        begin: "\\["
+        beginCaptures:
+          "0":
+            name: "punctuation.section.brackets.begin.erabasic"
+        end: "(\\])|$"
+        endCaptures:
+          "1":
+            name: "punctuation.section.brackets.end.erabasic"
         patterns:
           - include: "#expression"
-  labeled-statement:
+      - include: "#expression"
+  "labeled-statement":
     patterns:
-      - match: "\\$([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+      -
+        match: "(?:^|(?<=;))[ \\t]*\\$([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
         captures:
           "1":
-            name: entity.name.label.erabasic
-  control-statement:
+            name: "entity.name.label.erabasic"
+  "control-statement":
     patterns:
-      - begin: "\\bCASE\\b"
-        beginCaptures:
-          "0":
-            name: keyword.control.erabasic
-        end: "$"
-        patterns:
-          - name: keyword.control.erabasic
-            match: "\\b(IS|TO)\\b"
-          - include: "#expression"
-      - begin: "\\b(TRYCCALL|TRYCJUMP)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.control.erabasic
-        end: "$"
-        patterns:
-          - name: entity.name.function.erabasic
-            match: "[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
-          - begin: "(?=,|\\()"
-            end: "(?=$)"
-            patterns:
-              - include: "#expression"
-      - begin: "\\b(TRYCCALLFORM|TRYCJUMPFORM)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.control.erabasic
-        end: "$"
-        patterns:
-          - name: entity.name.function.erabasic
-            match: "[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
-          - include: "#form-string"
-          - begin: "(?=,|\\()"
-            end: "(?=$)"
-            patterns:
-              - include: "#expression"
-      - begin: "\\bTRYCGOTOFORM\\b"
-        beginCaptures:
-          "0":
-            name: keyword.control.erabasic
-        end: "$"
-        patterns:
-          - include: "#form-string"
-      - begin: "\\b(PRINTDATA|PRINTDATAL|PRINTDATAW|PRINTDATAK|PRINTDATAKL|PRINTDATAKW|PRINTDATAD|PRINTDATADL|PRINTDATADW|STRDATA|ENDDATA|DATALIST|ENDLIST|NOSKIP|ENDNOSKIP|SIF|IF|ELSEIF|ELSE|ENDIF|REPEAT|REND|FOR|NEXT|WHILE|WEND|DO|LOOP|SELECTCASE|CASEELSE|ENDSELECT|TRYCGOTO|CATCH|ENDCATCH|TRYCALLLIST|TRYJUMPLIST|TRYGOTOLIST|ENDFUNC)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.control.erabasic
-        end: "$"
-        patterns:
-          - include: "#expression"
-  command-statement:
-    patterns:
-      - begin: "\\b(CALL|JUMP|TRYCALL|TRYJUMP|CALLF|CALLEVENT|FUNC)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.command.erabasic
-        end: "$"
-        patterns:
-          - name: entity.name.function.erabasic
-            match: "[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
-          - begin: "(?=,|\\()"
-            end: "(?=$)"
-            patterns:
-              - include: "#expression"
-      - begin: "\\b(CALLFORM|JUMPFORM|TRYCALLFORM|TRYJUMPFORM|CALLFORMF)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.command.erabasic
-        end: "$"
-        patterns:
-          - name: entity.name.function.erabasic
-            match: "[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
-          - include: "#form-string"
-          - begin: "(?=,|\\()"
-            end: "(?=$)"
-            patterns:
-              - include: "#expression"
-      - begin: "\\b(PRINT|PRINTL|PRINTW|PRINTK|PRINTKL|PRINTKW|PRINTD|PRINTDL|PRINTDW|PRINTSINGLE|PRINTSINGLEK|PRINTSINGLED|PRINTC|PRINTCK|PRINTCD|PRINTLC|PRINTLCK|PRINTLCD|DATA|PRINTPLAIN|CUSTOMDRAWLINE|SETCOLORBYNAME|SETBGCOLORBYNAME|STRLEN|STRLENU|ESCAPE|DEBUGPRINT|DEBUGPRINTL)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.other.command.erabasic
-        end: "$"
-      - begin: "\\b(PRINTFORM|PRINTFORML|PRINTFORMW|PRINTFORMK|PRINTFORMKL|PRINTFORMKW|PRINTFORMD|PRINTFORMDL|PRINTFORMDW|PRINTSINGLEFORM|PRINTSINGLEFORMK|PRINTSINGLEFORMD|PRINTFORMC|PRINTFORMCK|PRINTFORMCD|PRINTFORMLC|PRINTFORMLCK|PRINTFORMLCD|DATAFORM|PRINTPLAINFORM|DRAWLINEFORM|REUSELASTLINE|STRLENFORM|STRLENFORMU|ENCODETOUNI|INPUTS|ONEINPUTS|THROW|GOTOFORM|TRYGOTOFORM|RETURNFORM|DEBUGPRINTFORM|DEBUGPRINTFORML|PUTFORM)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.other.command.erabasic
-        end: "$"
-        patterns:
-          - include: "#form-string"
-      - begin: "\\b(PRINTV|PRINTVL|PRINTVW|PRINTVK|PRINTVKL|PRINTVKW|PRINTVD|PRINTVDL|PRINTVDW|PRINTS|PRINTSL|PRINTSW|PRINTSK|PRINTSKL|PRINTSKW|PRINTSD|PRINTSDL|PRINTSDW|PRINTFORMS|PRINTFORMSL|PRINTFORMSW|PRINTFORMSK|PRINTFORMSKL|PRINTFORMSKW|PRINTFORMSD|PRINTFORMSDL|PRINTFORMSDW|PRINTSINGLEV|PRINTSINGLEVK|PRINTSINGLEVD|PRINTSINGLES|PRINTSINGLESK|PRINTSINGLESD|PRINTSINGLEFORMS|PRINTSINGLEFORMSK|PRINTSINGLEFORMSD|PRINTBUTTON|PRINTBUTTONC|PRINTBUTTONLC|PRINT_ABL|PRINT_TALENT|PRINT_MARK|PRINT_EXP|PRINT_PALAM|PRINT_ITEM|PRINT_SHOPITEM|UPCHECK|DRAWLINE|CLEARLINE|PRINT_IMG|PRINT_RECT|PRINT_SPACE|SETCOLOR|SETCOLOR|RESETCOLOR|SETBGCOLOR|SETBGCOLOR|RESETBGCOLOR|GETCOLOR|GETDEFCOLOR|GETBGCOLOR|GETDEFBGCOLOR|GETFOCUSCOLOR|FONTBOLD|FONTITALIC|FONTREGULAR|FONTSTYLE|GETSTYLE|CHKFONT|SETFONT|GETFONT|FORCEKANA|ALIGNMENT|CURRENTALIGN|REDRAW|CURRENTREDRAW|PRINTCPERLINE|LINEISEMPTY|BARSTR|MONEYSTR|SKIPDISP|ISSKIP|MOUSESKIP|TOUPPER|TOLOWER|TOHALF|TOFULL|TOSTR|ISNUMERIC|TOINT|STRLENS|STRLENSU|SUBSTRING|SUBSTRINGU|CHARATU|STRFIND|STRFINDU|STRCOUNT|SPLIT|REPLACE|UNICODE|POWER|ABS|SIGN|SQRT|GETBIT|MAX|MIN|LIMIT|INRANGE|SETBIT|CLEARBIT|INVERTBIT|ADDCHARA|DELCHARA|SWAPCHARA|SORTCHARA|GETCHARA|ADDDEFCHARA|ADDVOIDCHARA|DELALLCHARA|PICKUPCHARA|EXISTCSV|FINDCHARA|FINDLASTCHARA|COPYCHARA|ADDCOPYCHARA|VARSIZE|RESETDATA|RESETGLOBAL|RESET_STAIN|SWAP|CSVNAME|CSVCALLNAME|CSVNICKNAME|CSVMASTERNAME|CSVBASE|CSVCSTR|CSVABL|CSVTALENT|CSVMARK|CSVEXP|CSVRELATION|CSVJUEL|CSVEQUIP|CSVCFLAG|GETNUM|GETPALAMLV|GETEXPLV|FINDELEMENT|FINDLASTELEMENT|VARSET|CVARSET|ARRAYSHIFT|ARRAYREMOVE|ARRAYSORT|ARRAYCOPY|CUPCHECK|SAVEDATA|LOADDATA|DELDATA|CHKDATA|SAVENOS|SAVEGLOBAL|LOADGLOBAL|OUTPUTLOG|SAVECHARA|LOADCHARA|CHKCHARADATA|FIND_CHARADATA|GETTIME|GETMILLISECOND|GETSECOND|FORCEWAIT|INPUT|TINPUT|TINPUTS|TWAIT|ONEINPUT|TONEINPUT|TONEINPUTS|WAITANYKEY|BREAK|CONTINUE|RANDOMIZE|DUMPRAND|INITRAND|BEGIN|CALLTRAIN|DOTRAIN|GOTO|TRYGOTO|RETURN|RETURNF|DEBUGCLEAR|ASSERT|TOOLTIP_SETCOLOR|TOOLTIP_SETDELAY|HTML_PRINT|HTML_TAGSPLIT|CLEARTEXTBOX|STOPCALLTRAIN|TIMES|BAR|BARL|SAVEGAME|LOADGAME|WAIT|RESTART|QUIT|GETTIMES|RAND|CBRT|LOG|LOG10|EXPONENT|SUMARRAY|MATCH|MAXARRAY|MINARRAY|SUMCARRAY|CMATCH|MAXCARRAY|MINCARRAY|GROUPMATCH|NOSAMES|ALLSAMES|MESSKIP|CONVERT|COLOR_FROMNAME|COLOR_FROMRGB|INRANGEARRAY|INRANGECARRAY|GETLINESTR|PRINTCLENGTH|STRFORM|GETCONFIG|GETCONFIGS|HTML_POPPRINTINGSTR|HTML_GETPRINTEDSTR|HTML_ESCAPE|HTML_TOPLAINTEXT|TOOLTIP_SETDURATION|AWAIT|STRJOIN|GETKEY|GETKEYTRIGGERED|MOUSEX|MOUSEY|ISACTIVE|SAVETEXT|LOADTEXT|SPRITECREATED|SPRITEWIDTH|SPRITEHEIGHT|SPRITEPOSX|SPRITEPOSY|SPRITESETPOS|SPRITEMOVE|ARRAYMSORT|CLIENTWIDTH|CLIENTHEIGHT|GCREATED|GWIDTH|GHEIGHT|GGETCOLOR|GCREATE|GCREATEFROMFILE|GDISPOSE|GCLEAR|GFILLRECTANGLE|GDRAWSPRITE|GSETCOLOR|GDRAWG|GDRAWGWITHMASK|GSETBRUSH|GSETFONT|GSETPEN|GSAVE|GLOAD|SPRITECREATE|SPRITEANIMECREATE|SPRITEANIMEADDFRAME|SPRITEDISPOSE|SPRITEGETCOLOR|CBGSETG|CBGSETSPRITE|CBGCLEAR|CBGREMOVERANGE|CBGSETBUTTONSPRITE|CBGCLEARBUTTON|CBGSETBMAPG|CBGREMOVEBMAP|INPUTMOUSEKEY|SETANIMETIMER)\\b"
-        beginCaptures:
-          "0":
-            name: keyword.other.command.erabasic
-        end: "$"
-        patterns:
-          - include: "#expression"
-  assignment-statement:
-    name: meta.assignment.erabasic
-    patterns:
-      - begin: "([^*/%+\\-<>&|\\^'=!]=[^=])(?=\\s*(?:%|{|\\@))"
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:CASE))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
         beginCaptures:
           "1":
-            name: keyword.operator.assignment.erabasic
+            name: "keyword.control.erabasic"
         end: "$"
         patterns:
-          - include: "#form-string"
-      - begin: "\\*=|/=|%=|\\+=|-=|<<=|>>=|&=|\\|=|\\^=|'=|[^=!<>]=[^=]"
+          -
+            name: "keyword.other.case.erabasic"
+            match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])(?i:IS|TO)(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+          - include: "#expression"
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:STOPCALLTRAIN|PRINTDATADL|PRINTDATADW|PRINTDATAKL|PRINTDATAKW|TRYCALLLIST|TRYGOTOLIST|TRYJUMPLIST|PRINTDATAD|PRINTDATAK|PRINTDATAL|PRINTDATAW|SELECTCASE|CALLTRAIN|ENDNOSKIP|ENDSELECT|PRINTDATA|RANDOMIZE|CASEELSE|CONTINUE|DATALIST|DUMPRAND|ENDCATCH|INITRAND|TRYCGOTO|DOTRAIN|ENDDATA|ENDFUNC|ENDLIST|RESTART|RETURNF|STRDATA|TRYGOTO|ELSEIF|NOSKIP|REPEAT|RETURN|BEGIN|BREAK|CATCH|ENDIF|WHILE|DATA|ELSE|GOTO|LOOP|NEXT|REND|WEND|FOR|SIF|DO|IF)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
         beginCaptures:
-          "0":
-            name: keyword.operator.assignment.erabasic
+          "1":
+            name: "keyword.control.erabasic"
         end: "$"
         patterns:
           - include: "#expression"
-  form-string:
+  "form-command-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:PRINTSINGLEFORMSD|PRINTSINGLEFORMSK|PRINTSINGLEFORMD|PRINTSINGLEFORMK|PRINTSINGLEFORMS|DEBUGPRINTFORML|PRINTSINGLEFORM|DEBUGPRINTFORM|PRINTPLAINFORM|DRAWLINEFORM|PRINTFORMSDL|PRINTFORMSDW|PRINTFORMSKL|PRINTFORMSKW|TRYCGOTOFORM|ENCODETOUNI|PRINTFORMDL|PRINTFORMDW|PRINTFORMKL|PRINTFORMKW|PRINTFORMSD|PRINTFORMSK|PRINTFORMSL|PRINTFORMSW|STRLENFORMU|TRYGOTOFORM|PRINTFORMD|PRINTFORMK|PRINTFORML|PRINTFORMS|PRINTFORMW|RETURNFORM|STRLENFORM|ONEINPUTS|PRINTFORM|DATAFORM|GOTOFORM|PUTFORM|INPUTS|THROW)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        beginCaptures:
+          "1":
+            name: "keyword.other.command.form.erabasic"
+        end: "$"
+        patterns:
+          - include: "#form-string"
+  "form-call-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:TRYCCALLFORM|TRYCJUMPFORM|TRYCALLFORM|TRYJUMPFORM|CALLFORMF|CALLFORM|JUMPFORM|FUNC)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        beginCaptures:
+          "1":
+            name: "keyword.control.call.form.erabasic"
+        end: "$"
+        patterns:
+          - include: "#form-string-call"
+          -
+            begin: "(?=[,\\[(])"
+            end: "$"
+            patterns:
+              - include: "#square-brackets"
+              - include: "#expression"
+  "call-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:CALLEVENT|TRYCCALL|TRYCJUMP|TRYCALL|TRYJUMP|CALLF|CALL|JUMP)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])\\s+([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)"
+        beginCaptures:
+          "1":
+            name: "keyword.control.call.erabasic"
+          "2":
+            name: "entity.name.function.erabasic"
+        end: "$"
+        patterns:
+          - include: "#expression"
+  "print-command-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:PRINTSINGLEFORMSD|PRINTSINGLEFORMSK|PRINTSINGLEFORMD|PRINTSINGLEFORMK|PRINTSINGLEFORMS|SETBGCOLORBYNAME|PRINTSINGLEFORM|CUSTOMDRAWLINE|PRINTPLAINFORM|PRINT_SHOPITEM|SETCOLORBYNAME|PRINTBUTTONLC|PRINTCPERLINE|PRINTSINGLESD|PRINTSINGLESK|PRINTSINGLEVD|PRINTSINGLEVK|REUSELASTLINE|PRINTBUTTONC|PRINTFORMLCD|PRINTFORMLCK|PRINTFORMSDL|PRINTFORMSDW|PRINTFORMSKL|PRINTFORMSKW|PRINTSINGLED|PRINTSINGLEK|PRINTSINGLES|PRINTSINGLEV|PRINT_TALENT|RESETBGCOLOR|FONTREGULAR|PRINTBUTTON|PRINTDATADL|PRINTDATADW|PRINTDATAKL|PRINTDATAKW|PRINTFORMCD|PRINTFORMCK|PRINTFORMDL|PRINTFORMDW|PRINTFORMKL|PRINTFORMKW|PRINTFORMLC|PRINTFORMSD|PRINTFORMSK|PRINTFORMSL|PRINTFORMSW|PRINTSINGLE|PRINT_PALAM|PRINT_SPACE|DEBUGCLEAR|FONTITALIC|HTML_PRINT|PRINTDATAD|PRINTDATAK|PRINTDATAL|PRINTDATAW|PRINTFORMC|PRINTFORMD|PRINTFORMK|PRINTFORML|PRINTFORMS|PRINTFORMW|PRINTPLAIN|PRINT_ITEM|PRINT_MARK|PRINT_RECT|RESETCOLOR|SETBGCOLOR|ALIGNMENT|CLEARLINE|FONTSTYLE|PRINTDATA|PRINTFORM|PRINT_ABL|PRINT_EXP|PRINT_IMG|CUPCHECK|DRAWLINE|FONTBOLD|PRINTLCD|PRINTLCK|PRINTSDL|PRINTSDW|PRINTSKL|PRINTSKW|PRINTVDL|PRINTVDW|PRINTVKL|PRINTVKW|SETCOLOR|PRINTCD|PRINTCK|PRINTDL|PRINTDW|PRINTKL|PRINTKW|PRINTLC|PRINTSD|PRINTSK|PRINTSL|PRINTSW|PRINTVD|PRINTVK|PRINTVL|PRINTVW|SETFONT|STRLENU|UPCHECK|PRINTC|PRINTD|PRINTK|PRINTL|PRINTS|PRINTV|PRINTW|REDRAW|STRLEN|PRINT|TIMES|BARL|BAR)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        beginCaptures:
+          "1":
+            name: "keyword.other.command.print.erabasic"
+        end: "$"
+        patterns:
+          - include: "#single-quoted-string"
+          - include: "#expression"
+  "input-command-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:INPUTMOUSEKEY|TONEINPUTS|WAITANYKEY|FORCEWAIT|TONEINPUT|ONEINPUT|TINPUTS|TINPUT|AWAIT|INPUT|TWAIT|WAIT)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        beginCaptures:
+          "1":
+            name: "keyword.other.command.input.erabasic"
+        end: "$"
+        patterns:
+          - include: "#single-quoted-string"
+          - include: "#expression"
+  "command-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*((?i:(?:TOOLTIP_SETDURATION|TOOLTIP_SETCOLOR|TOOLTIP_SETDELAY|HTML_TAGSPLIT|ADDCOPYCHARA|ADDVOIDCHARA|CLEARTEXTBOX|ADDDEFCHARA|ARRAYREMOVE|DEBUGPRINTL|DELALLCHARA|PICKUPCHARA|RESETGLOBAL|RESET_STAIN|ADDSPCHARA|ARRAYSHIFT|DEBUGPRINT|LOADGLOBAL|SAVEGLOBAL|ARRAYCOPY|ARRAYSORT|COPYCHARA|FORCEKANA|INVERTBIT|LOADCHARA|OUTPUTLOG|REFBYNAME|RESETDATA|SAVECHARA|SORTCHARA|SWAPCHARA|ADDCHARA|CLEARBIT|DELCHARA|LOADDATA|LOADGAME|SAVEDATA|SAVEGAME|SKIPDISP|CVARSET|DELDATA|GETTIME|LOADVAR|SAVENOS|SAVEVAR|VARSIZE|ASSERT|SETBIT|VARSET|POWER|SPLIT|CASE|QUIT|SWAP|REF)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+        beginCaptures:
+          "1":
+            name: "keyword.other.command.erabasic"
+        end: "$"
+        patterns:
+          - include: "#expression"
+  "assignment-statement":
+    patterns:
+      -
+        begin: "(?:^|(?<=;))[ \\t]*(?=[^;]*?(?:'=|<<=|>>=|\\+=|-=|\\*=|/=|%=|\\|=|&=|\\^=|==|=(?!=)))"
+        end: "$"
+        patterns:
+          -
+            name: "keyword.operator.assignment.erabasic"
+            match: "(?:'=|<<=|>>=|\\+=|-=|\\*=|/=|%=|\\|=|&=|\\^=|==|=(?!=))"
+          - include: "#form-string"
+          - include: "#expression"
+  "form-string":
     patterns:
       - include: "#string-conditional-operator"
+      - include: "#triple-symbol"
       - include: "#string-placeholder"
       - include: "#numeric-placeholder"
-  string-conditional-operator:
+      - include: "#escape-sequence"
+  "form-string-call":
     patterns:
-      - name: meta.template.expression.erabasic
-        match: "(\\\\@)(.+?)(\\?)(.*?)(#)(.*?)(\\\\@)"
+      - include: "#string-conditional-operator"
+      - include: "#triple-symbol"
+      - include: "#string-placeholder"
+      - include: "#numeric-placeholder"
+      - include: "#escape-sequence"
+  "string-conditional-operator":
+    patterns:
+      -
+        name: "meta.template.expression.erabasic"
+        match: "(\\\\@)(.*?)(\\?)(.*?)(#)(.*?)(\\\\@)"
         captures:
           "1":
-            name: keyword.other.placeholder.erabasic
+            name: "keyword.other.placeholder.erabasic"
           "2":
             patterns:
               - include: "#expression"
           "3":
-            name: keyword.operator.conditional.erabasic
+            name: "keyword.operator.ternary.erabasic"
           "4":
             patterns:
-              - include: "#string-placeholder"
-              - include: "#numeric-placeholder"
+              - include: "#form-string"
           "5":
-            name: keyword.operator.conditional.erabasic
+            name: "keyword.operator.ternary.erabasic"
           "6":
             patterns:
-              - include: "#string-placeholder"
-              - include: "#numeric-placeholder"
+              - include: "#form-string"
           "7":
-            name: keyword.other.placeholder.erabasic
-  string-placeholder:
+            name: "keyword.other.placeholder.erabasic"
+  "triple-symbol":
     patterns:
-      - name: meta.template.expression.erabasic
-        begin: "(?<!\\\\)%"
+      -
+        name: "constant.other.symbol.erabasic"
+        match: "\\*\\*\\*|\\+\\+\\+|===|///|\\$\\$\\$"
+  "escape-sequence":
+    patterns:
+      -
+        name: "constant.character.escape.erabasic"
+        match: "\\\\."
+  "string-placeholder":
+    patterns:
+      -
+        name: "meta.template.expression.erabasic"
+        begin: "(?<!\\\\)%(?=[^%\\n]*%)"
         beginCaptures:
           "0":
-            name: keyword.other.placeholder.erabasic
+            name: "keyword.other.placeholder.erabasic"
         end: "(%)|$"
         endCaptures:
           "1":
-            name: keyword.other.placeholder.erabasic
+            name: "keyword.other.placeholder.erabasic"
         patterns:
           - include: "#expression"
-  numeric-placeholder:
+  "numeric-placeholder":
     patterns:
-      - name: meta.template.expression.erabasic
-        begin: "(?<!\\\\){"
+      -
+        name: "meta.template.expression.erabasic"
+        begin: "(?<!\\\\)\\{(?=[^{}\\n]*\\})"
         beginCaptures:
           "0":
-            name: keyword.other.placeholder.erabasic
+            name: "keyword.other.placeholder.erabasic"
         end: "(})|$"
         endCaptures:
           "1":
-            name: keyword.other.placeholder.erabasic
+            name: "keyword.other.placeholder.erabasic"
         patterns:
           - include: "#expression"
   expression:
@@ -246,112 +362,174 @@ repository:
       - include: "#round-braces"
       - include: "#operators"
       - include: "#string-literal"
+      - include: "#formatted-string"
       - include: "#numeric-literal"
       - include: "#function-call"
       - include: "#predefined-variables"
+      - include: "#label-reference"
       - include: "#identifier"
       - include: "#punctuation"
-  round-braces:
+  "round-braces":
     patterns:
-      - begin: "\\("
+      -
+        begin: "\\("
         beginCaptures:
           "0":
-            name: punctuation.parenthesis.open.erabasic
+            name: "punctuation.parenthesis.open.erabasic"
         end: "(\\))|$"
         endCaptures:
           "1":
-            name: punctuation.parenthesis.close.erabasic
+            name: "punctuation.parenthesis.close.erabasic"
+        patterns:
+          - include: "#expression"
+  "square-brackets":
+    patterns:
+      -
+        begin: "\\["
+        beginCaptures:
+          "0":
+            name: "punctuation.section.brackets.begin.erabasic"
+        end: "(\\])|$"
+        endCaptures:
+          "1":
+            name: "punctuation.section.brackets.end.erabasic"
         patterns:
           - include: "#expression"
   operators:
     patterns:
-      - name: keyword.operator.bitwise.erabasic
+      -
+        name: "keyword.operator.shift.erabasic"
         match: "<<|>>"
-      - name: keyword.operator.comparison.erabasic
+      -
+        name: "keyword.operator.comparison.erabasic"
         match: "==|!=|<=|>=|<|>"
-      - name: keyword.operator.logical.erabasic
-        match: "&&|\\|\\|\\^\\^|!&|!\\||!"
-      - name: keyword.operator.bitwise.erabasic
+      -
+        name: "keyword.operator.logical.erabasic"
+        match: "&&|\\|\\||\\^\\^|!&|!\\||!"
+      -
+        name: "keyword.operator.bitwise.erabasic"
         match: "~|&|\\||\\^"
-      - name: keyword.operator.assignment.erabasic
-        match: "="
-      - name: keyword.operator.decrement.erabasic
-        match: "--"
-      - name: keyword.operator.increment.erabasic
+      -
+        name: "keyword.operator.increment.erabasic"
         match: "\\+\\+"
-      - name: keyword.operator.arithmetic.erabasic
+      -
+        name: "keyword.operator.decrement.erabasic"
+        match: "--"
+      -
+        name: "keyword.operator.arithmetic.erabasic"
         match: "\\*|/|%|\\+|-"
-      - name: keyword.operator.conditional.erabasic
+      -
+        name: "keyword.operator.ternary.erabasic"
         match: "\\?|#"
-      - name: keyword.operator.subscript.erabasic
+      -
+        name: "keyword.operator.assignment.erabasic"
+        match: "="
+      -
+        name: "keyword.operator.subscript.erabasic"
         match: ":"
-  string-literal:
+  "string-literal":
     patterns:
-      - name: string.quoted.double.erabasic
-        begin: '@"'
+      -
+        name: "string.quoted.double.erabasic"
+        begin: "\""
         beginCaptures:
           "0":
-            name: punctuation.definition.string.begin.erabasic
-        end: (")|$
+            name: "punctuation.definition.string.begin.erabasic"
+        end: "(\")|$"
         endCaptures:
           "1":
-            name: punctuation.definition.string.end.erabasic
+            name: "punctuation.definition.string.end.erabasic"
+        patterns:
+          - include: "#escape-sequence"
+  "formatted-string":
+    patterns:
+      -
+        name: "string.quoted.double.formatted.erabasic"
+        begin: "@\""
+        beginCaptures:
+          "0":
+            name: "punctuation.definition.string.begin.erabasic"
+        end: "(\")|$"
+        endCaptures:
+          "1":
+            name: "punctuation.definition.string.end.erabasic"
         patterns:
           - include: "#form-string"
-          - name: constant.character.escape.erabasic
-            match: "\\\\."
-      - name: string.quoted.double.erabasic
-        begin: '"'
+  "single-quoted-string":
+    patterns:
+      -
+        name: "string.quoted.single.erabasic"
+        begin: "'"
         beginCaptures:
           "0":
-            name: punctuation.definition.string.begin.erabasic
-        end: (")|$
+            name: "punctuation.definition.string.begin.erabasic"
+        end: "(')|$"
         endCaptures:
           "1":
-            name: punctuation.definition.string.end.erabasic
+            name: "punctuation.definition.string.end.erabasic"
         patterns:
-          - name: constant.character.escape.erabasic
-            match: "\\\\."
-  numeric-literal:
+          - include: "#escape-sequence"
+  "numeric-literal":
     patterns:
-      - name: constant.numeric.hex.erabasic
-        match: "\\b0(x|X)[0-9a-fA-F]+\\b"
-      - name: constant.numeric.binary.erabasic
-        match: "\\b0(b|B)[01]+\\b"
-      - name: constant.numeric.erabasic
-        match: "\\b([0-9]+)\\.[0-9]+\\b"
-      - name: constant.numeric.erabasic
-        match: "\\b[0-9]+(p|P|e|E)[0-9]+\\b"
-      - name: constant.numeric.erabasic
-        match: "\\b[0-9]+\\b"
-  function-call:
+      -
+        name: "constant.numeric.hex.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])0[xX][0-9a-fA-F]+"
+      -
+        name: "constant.numeric.binary.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])0[bB][01]+"
+      -
+        name: "constant.numeric.float.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])[0-9]+\\.[0-9]+"
+      -
+        name: "constant.numeric.exponent.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])[0-9]+[eEpP][+-]?[0-9]+"
+      -
+        name: "constant.numeric.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])[0-9]+"
+  "function-call":
     patterns:
-      - begin: "\\b(?:(GETCHARA|FINDCHARA|FINDLASTCHARA|CSVNAME|CSVCALLNAME|CSVNICKNAME|CSVMASTERNAME|CSVCSTR|CSVBASE|CSVABL|CSVTALENT|CSVMARK|CSVEXP|CSVRELATION|CSVJUEL|CSVEQUIP|CSVCFLAG|EXISTCSV|GETNUM|STRLENS|STRLENSU|SUBSTRING|SUBSTRINGU|CHARATU|STRFIND|STRFINDU|STRCOUNT|UNICODE|ENCODETOUNI|REPLACE|ESCAPE|VARSIZE|GETTIME|GETTIMES|GETMILLISECOND|GETSECOND|CHKFONT|POWER|RAND|ABS|SIGN|MAX|MIN|LIMIT|INRANGE|SQRT|GETBIT|CBRT|LOG|LOG10|EXPONENT|GETFONT|GETCOLOR|GETDEFCOLOR|GETBGCOLOR|GETDEFBGCOLOR|GETFOCUSCOLOR|GETSTYLE|CURRENTALIGN|CURRENTREDRAW|TOSTR|GETPALAMLV|GETEXPLV|TOUPPER|TOLOWER|TOHALF|TOFULL|SUMARRAY|MATCH|MAXARRAY|MINARRAY|SUMCARRAY|CMATCH|MAXCARRAY|MINCARRAY|ISNUMERIC|TOINT|CHKDATA|CHKCHARADATA|FIND_CHARADATA|SAVENOS|PRINTCPERLINE|LINEISEMPTY|GROUPMATCH|NOSAMES|ALLSAMES|ISSKIP|MOUSESKIP|MESSKIP|CONVERT|MONEYSTR|FINDELEMENT|FINDLASTELEMENT|BARSTR|COLOR_FROMNAME|COLOR_FROMRGB|INRANGEARRAY|INRANGECARRAY|GETLINESTR|PRINTCLENGTH|STRFORM|GETCONFIG|GETCONFIGS|HTML_POPPRINTINGSTR|HTML_GETPRINTEDSTR|HTML_ESCAPE|HTML_TOPLAINTEXT|STRJOIN|GETKEY|GETKEYTRIGGERED|MOUSEX|MOUSEY|ISACTIVE|SAVETEXT|LOADTEXT|SPRITECREATED|SPRITEWIDTH|SPRITEHEIGHT|SPRITEPOSX|SPRITEPOSY|SPRITESETPOS|SPRITEMOVE|ARRAYMSORT|CLIENTWIDTH|CLIENTHEIGHT|GCREATED|GWIDTH|GHEIGHT|GGETCOLOR|GCREATE|GCREATEFROMFILE|GDISPOSE|GCLEAR|GFILLRECTANGLE|GDRAWSPRITE|GSETCOLOR|GDRAWG|GDRAWGWITHMASK|GSETBRUSH|GSETFONT|GSETPEN|GSAVE|GLOAD|SPRITECREATE|SPRITEANIMECREATE|SPRITEANIMEADDFRAME|SPRITEDISPOSE|SPRITEGETCOLOR|CBGSETG|CBGSETSPRITE|CBGCLEAR|CBGREMOVERANGE|CBGSETBUTTONSPRITE|CBGCLEARBUTTON|CBGSETBMAPG|CBGREMOVEBMAP)|([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+))\\s*\\("
+      -
+        begin: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])((?i:(?:HTML_POPPRINTINGSTR|SPRITEANIMEADDFRAME|CBGSETBUTTONSPRITE|HTML_GETPRINTEDSTR|SPRITEANIMECREATE|HTML_TOPLAINTEXT|FINDLASTELEMENT|GCREATEFROMFILE|GETKEYTRIGGERED|CBGCLEARBUTTON|CBGREMOVERANGE|COLOR_FROMNAME|FIND_CHARADATA|GDRAWGWITHMASK|GETMILLISECOND|GFILLRECTANGLE|SPRITEGETCOLOR|CBGREMOVEBMAP|COLOR_FROMRGB|CSVMASTERNAME|CURRENTREDRAW|FINDLASTCHARA|GETDEFBGCOLOR|GETFOCUSCOLOR|INRANGECARRAY|PRINTCPERLINE|SETANIMETIMER|SPRITECREATED|SPRITEDISPOSE|CBGSETSPRITE|CHKCHARADATA|CLIENTHEIGHT|CURRENTALIGN|INRANGEARRAY|PRINTCLENGTH|SPRITECREATE|SPRITEHEIGHT|SPRITESETPOS|CBGSETBMAPG|CLIENTWIDTH|CSVCALLNAME|CSVNICKNAME|CSVRELATION|ENCODETOUNI|FINDELEMENT|GDRAWSPRITE|GETDEFCOLOR|HTML_ESCAPE|LINEISEMPTY|SPRITEWIDTH|UNICODEBYTE|ARRAYMSORT|GETBGCOLOR|GETCONFIGS|GETLINESTR|GETPALAMLV|GETSPCHARA|GROUPMATCH|SPRITEMOVE|SPRITEPOSX|SPRITEPOSY|SUBSTRINGU|CSVTALENT|FINDCHARA|GETCONFIG|GETSECOND|GGETCOLOR|GSETBRUSH|GSETCOLOR|ISNUMERIC|MAXCARRAY|MINCARRAY|MOUSESKIP|SUBSTRING|SUMCARRAY|ALLSAMES|CBGCLEAR|CSVCFLAG|CSVEQUIP|EXISTCSV|EXPONENT|GCREATED|GDISPOSE|GETCHARA|GETCOLOR|GETEXPLV|GETSTYLE|GETTIMES|GSETFONT|ISACTIVE|LOADTEXT|MAXARRAY|MINARRAY|MONEYSTR|SAVETEXT|STRCOUNT|STRFINDU|STRLENSU|SUMARRAY|CBGSETG|CHARATU|CHKDATA|CHKFONT|CONVERT|CSVBASE|CSVCSTR|CSVJUEL|CSVMARK|CSVNAME|GCREATE|GETFONT|GETNUMB|GETTIME|GHEIGHT|GSETPEN|INRANGE|MESSKIP|NOSAMES|REPLACE|SAVENOS|STRFIND|STRFORM|STRJOIN|STRLENS|TOLOWER|TOUPPER|UNICODE|VARSIZE|BARSTR|CMATCH|CSVABL|CSVEXP|ESCAPE|GCLEAR|GDRAWG|GETBIT|GETKEY|GETNUM|GWIDTH|ISSKIP|MOUSEX|MOUSEY|TOFULL|TOHALF|GLOAD|GSAVE|LIMIT|LOG10|MATCH|POWER|TOINT|TOSTR|CBRT|RAND|SIGN|SQRT|ABS|LOG|MAX|MIN)))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])\\s*\\("
         beginCaptures:
           "1":
-            name: support.function.builtin.erabasic
-          "2":
-            name: entity.name.function.erabasic
+            name: "support.function.builtin.erabasic"
         end: "\\)|$"
         patterns:
           - include: "#expression"
-  predefined-variables:
+      -
+        begin: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])([^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+)((?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]))\\s*\\("
+        beginCaptures:
+          "1":
+            name: "entity.name.function.erabasic"
+        end: "\\)|$"
+        patterns:
+          - include: "#expression"
+  "label-reference":
     patterns:
-      - name: support.variable.global.erabasic
-        match: "\\b(DAY|MONEY|ITEM|FLAG|TFLAG|UP|PALAMLV|EXPLV|EJAC|DOWN|RESULT|COUNT|TARGET|ASSI|MASTER|NOITEM|LOSEBASE|SELECTCOM|ASSIPLAY|PREVCOM|TIME|ITEMSALES|PLAYER|NEXTCOM|PBAND|BOUGHT|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|GLOBAL|RANDDATA|SAVESTR|TSTR|STR|RESULTS|GLOBALS|SAVEDATA_TEXT|ISASSI|NO|BASE|MAXBASE|ABL|TALENT|EXP|MARK|PALAM|SOURCE|EX|CFLAG|JUEL|RELATION|EQUIP|TEQUIP|STAIN|GOTJUEL|NOWEX|DOWNBASE|CUP|CDOWN|TCVAR|NAME|CALLNAME|NICKNAME|MASTERNAME|CSTR|CDFLAG|DITEMTYPE|DA|DB|DC|DD|DE|TA|TB|ITEMPRICE|ABLNAME|TALENTNAME|EXPNAME|MARKNAME|PALAMNAME|ITEMNAME|TRAINNAME|BASENAME|SOURCENAME|EXNAME|EQUIPNAME|TEQUIPNAME|FLAGNAME|TFLAGNAME|CFLAGNAME|TCVARNAME|CSTRNAME|STAINNAME|CDFLAGNAME1|CDFLAGNAME2|STRNAME|TSTRNAME|SAVESTRNAME|GLOBALNAME|GLOBALSNAME|GAMEBASE_AUTHER|GAMEBASE_AUTHOR|GAMEBASE_INFO|GAMEBASE_YEAR|GAMEBASE_TITLE|GAMEBASE_GAMECODE|GAMEBASE_VERSION|GAMEBASE_ALLOWVERSION|GAMEBASE_DEFAULTCHARA|GAMEBASE_NOITEM|RAND|CHARANUM|LASTLOAD_TEXT|LASTLOAD_VERSION|LASTLOAD_NO|LINECOUNT|ISTIMEOUT|__INT_MAX__|__INT_MIN__|EMUERA_VERSION|WINDOW_TITLE|MONEYLABEL|DRAWLINESTR|__FILE__|__FUNCTION__|__LINE__|LOCAL|ARG|LOCALS|ARGS)\\b"
+      -
+        name: "entity.name.label.erabasic"
+        match: "\\$[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
+  "predefined-variables":
+    patterns:
+      -
+        name: "variable.other.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])(?i:(?:GAMEBASE_ALLOWVERSION|GAMEBASE_DEFAULTCHARA|GAMEBASE_GAMECODE|GAMEBASE_VERSION|LASTLOAD_VERSION|GAMEBASE_AUTHER|GAMEBASE_AUTHOR|GAMEBASE_NOITEM|EMUERA_VERSION|GAMEBASE_TITLE|GAMEBASE_INFO|GAMEBASE_YEAR|LASTLOAD_TEXT|SAVEDATA_TEXT|WINDOW_TITLE|__FUNCTION__|CDFLAGNAME1|CDFLAGNAME2|DRAWLINESTR|GLOBALSNAME|LASTLOAD_NO|SAVESTRNAME|__INT_MAX__|__INT_MIN__|GLOBALNAME|MASTERNAME|MONEYLABEL|SOURCENAME|TALENTNAME|TEQUIPNAME|CFLAGNAME|DITEMTYPE|EQUIPNAME|ISTIMEOUT|ITEMPRICE|ITEMSALES|LINECOUNT|PALAMNAME|SELECTCOM|STAINNAME|TCVARNAME|TFLAGNAME|TRAINNAME|ASSIPLAY|BASENAME|CALLNAME|CHARANUM|CSTRNAME|DOWNBASE|FLAGNAME|ITEMNAME|LOSEBASE|MARKNAME|NICKNAME|RANDDATA|RELATION|TSTRNAME|__FILE__|__LINE__|ABLNAME|CVARS2D|EXPNAME|GLOBALS|GOTJUEL|MAXBASE|NEXTCOM|PALAMLV|PREVCOM|RESULTS|SAVESTR|STRNAME|BOUGHT|CDFLAG|CVAR2D|EXNAME|GLOBAL|ISASSI|LOCALS|MASTER|NOITEM|PLAYER|REFS2D|REFS3D|RESULT|SOURCE|TALENT|TARGET|TEQUIP|VARS2D|VARS3D|CDOWN|CFLAG|COUNT|CVARS|EQUIP|EXPLV|LOCAL|MONEY|NOWEX|PALAM|PBAND|REF2D|REF3D|STAIN|TCVAR|TFLAG|VAR2D|VAR3D|ARGS|ASSI|BASE|CSTR|CVAR|DOWN|EJAC|FLAG|ITEM|JUEL|MARK|NAME|RAND|REFS|TIME|TSTR|VARS|ABL|ARG|CUP|DAY|EXP|REF|STR|VAR|DA|DB|DC|DD|DE|EX|NO|TA|TB|UP|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
+      -
+        name: "keyword.other.reserved.erabasic"
+        match: "(?<![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])(?i:(?:CHARADATA|__DEBUG__|SAVEDATA|__SKIP__|DYNAMIC|PRIVATE|REFFUNC|GLOBAL|STATIC|INT|REF|STR|IS|TO|_))(?![^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e])"
   identifier:
     patterns:
-      - name: entity.name.variable.erabasic
+      -
+        name: "variable.other.erabasic"
         match: "[^\\s\\x21-\\x2f\\x3a-\\x40\\x5b-\\x5e\\x7b-\\x7e]+"
   punctuation:
     patterns:
-      - name: punctuation.separator.expression.erabasic
+      -
+        name: "punctuation.separator.erabasic"
         match: ","
-  comment:
-    patterns:
-      - name: comment.line.erabasic
-        begin: ";"
-        beginCaptures:
-          "0":
-            name: punctuation.definition.comment.erabasic
-        end: "$"
+      -
+        name: "punctuation.separator.subidentifier.erabasic"
+        match: "@"
+      -
+        name: "punctuation.accessor.erabasic"
+        match: "\\."

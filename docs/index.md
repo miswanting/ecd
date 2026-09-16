@@ -76,18 +76,18 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
    - :green_circle:`直译`[强制配置项目](translation/Config)
    - :green_circle:`直译`[程序流程](translation/Flow)
    - :green_circle:`直译`[与 Eramaker 的差异](translation/Difference)
-   - :yellow_circle:`直译`新增的扩展语法
-     - :yellow_circle:`直译`[常规](translation/General)
-     - :yellow_circle:`直译`[运算符](translation/Operator)
-     - :yellow_circle:`直译`[常量与变量](translation/Variable)
-     - :yellow_circle:`直译`[用户自定义变量](translation/Custom_Variable)
+   - :green_circle:`直译`新增的扩展语法
+     - :green_circle:`直译`[常规](translation/General)
+     - :green_circle:`直译`[运算符](translation/Operator)
+     - :green_circle:`直译`[常量与变量](translation/Variable)
+     - :green_circle:`直译`[用户自定义变量](translation/Custom_Variable)
      - :green_circle:`直译`[命令](translation/Command)
-     - :yellow_circle:`直译`[函数与预处理器](translation/Function_and_Preprocessor)
-     - :yellow_circle:`直译`[表达式内函数](translation/Expression)
-     - :yellow_circle:`直译`[自定义表达式内函数](translation/Custom_Expression)
-     - :yellow_circle:`直译`[头文件](translation/Header_File)
-     - :yellow_circle:`直译`[HTML_PRINT 相关](translation/HTML_PRINT)
-     - :yellow_circle:`直译`[资源](translation/Resource)
+     - :green_circle:`直译`[函数与预处理器](translation/Function_and_Preprocessor)
+     - :green_circle:`直译`[表达式内函数](translation/Expression)
+     - :green_circle:`直译`[自定义表达式内函数](translation/Custom_Expression)
+     - :green_circle:`直译`[头文件](translation/Header_File)
+     - :green_circle:`直译`[HTML_PRINT 相关](translation/HTML_PRINT)
+     - :green_circle:`直译`[资源](translation/Resource)
 
 ## 第二步：指南部分
 
@@ -97,7 +97,8 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
   - :green_circle:`教程`[常量与变量](guide/tutorials/Variable)
   - :yellow_circle:`教程`[数值与文本](guide/tutorials/Type)
   - :yellow_circle:`教程`[输入与输出](guide/tutorials/IO)
-  - :black_circle:`教程`基本运算
+  - :green_circle:`教程`[小结1](guide/tutorials/Summary1)
+  - :yellow_circle:`教程`基本运算
   - :black_circle:`教程`表达式
   - :black_circle:`教程`简单语句
   - :black_circle:`教程`复合语句

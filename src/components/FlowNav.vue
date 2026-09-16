@@ -23,7 +23,7 @@ div.flow-nav(role="list")
 </template>
 
 <script setup>
-import { withBase } from "vuepress/client";
+import { withBase } from "../utils/withBase";
 import { eventFlow } from "../data/flow";
 
 // 交互式流程图：把「引擎在什么时机调用哪个函数」画成一列可点击的节点。

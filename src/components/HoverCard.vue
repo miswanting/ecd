@@ -34,7 +34,7 @@ span.hover-card(
 
 <script setup>
 import { computed, ref } from "vue";
-import { withBase } from "vuepress/client";
+import { withBase } from "../utils/withBase";
 import { variables } from "../data/variables";
 import { commands } from "../data/commands";
 

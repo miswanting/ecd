@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v7
         with:
-          node-version: "16"
+          node-version: "24"
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v6.1.0
         with:
-          version: 6.23.6
+          version: 12.4.1
 
       - name: Try Checkout Github Pages Branch
         continue-on-error: true
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           ref: "gh-pages"
 
       - name: Checkout Documentation Branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           ref: "dev"
           path: "documentation"
@@ -34,7 +34,7 @@ jobs:
       - name: Build Document
         run: |
           cd documentation
-          pnpm pnpm install
+          pnpm i
           pnpm run docs:build
           cd ..
           mv documentation/docs/.vuepress/dist dist
@@ -50,7 +50,7 @@ jobs:
           mv dist docs
 
       - name: Push
-        uses: github-actions-x/commit@v2.8
+        uses: github-actions-x/commit@v2.9
         with:
           github-token: ${{ secrets.key }}
           push-branch: "gh-pages"

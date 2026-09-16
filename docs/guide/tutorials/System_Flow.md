@@ -80,21 +80,9 @@ Emuera 会在特定时机去脚本里找这些函数，找到就调用，找不�
 
 ## 串起来看
 
-把流程画成图，大致是这样：
+把流程画成图，大致是这样（节点可以点击，会跳到对应的文档）：
 
-```
-启动
- └─ @SYSTEM_TITLE（标题画面）
-      ├─ 从头开始 → @EVENTFIRST（新游戏）
-      └─ 读取存档 → @TITLE_LOADGAME / 标准读取画面
-            └─ @EVENTLOAD（读档后）
-
-游戏进行
- └─ @SHOW_SHOP（主循环）
-      ├─ @SHOW_STATUS / @SHOW_USERCOM（显示）
-      ├─ @USERCOM → @EVENTCOM（执行指令）
-      └─ @EVENTCOMEND（收尾）
-```
+<FlowNav />
 
 完整的流程图（含训练流程等细节）可以参阅[程序流程](../../translation/Flow)。
 

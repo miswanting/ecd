@@ -40,18 +40,9 @@ Emuera 内部有一套固定的游戏流程。它会在特定时机自动调用�
 
 ## 流程概览
 
-```
-启动
- └─ @SYSTEM_TITLE（标题画面）
-      ├─ 从头开始 → @EVENTFIRST → BEGIN SHOP
-      └─ 读取存档 → @TITLE_LOADGAME / 标准读取画面 → @EVENTLOAD
+下面这张图是交互式的，点击节点即可跳到对应条目：
 
-游戏进行
- └─ @SHOW_SHOP（主循环）
-      ├─ @SHOW_STATUS / @SHOW_USERCOM（显示）
-      ├─ @USERCOM → @EVENTCOM（执行指令）
-      └─ @EVENTCOMEND（收尾）
-```
+<FlowNav />
 
 ## 最小示例
 

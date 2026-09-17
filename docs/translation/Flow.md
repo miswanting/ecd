@@ -43,11 +43,12 @@ import FlowTitle from './FlowTitle.vue'
 
 > https://osdn.net/projects/emuera/wiki/flow/attach/first.gif
 
-```flow
-start=>start: First
-event_first=>subroutine: @EventFirst
-end=>end: Error
-start->event_first->end
+```mermaid
+flowchart TD
+  start([First])
+  event_first[["@EventFirst"]]
+  endNode([Error])
+  start --> event_first --> endNode
 ```
 
 
@@ -160,22 +161,23 @@ Emuera 的`NextCom`是为了兼容旧代码而设计的，包括上述的 Bug，
 
 > https://osdn.net/projects/emuera/wiki/flow/attach/ablup.gif
 
-```flow
-start=>start: AblUp
-show_juel=>subroutine: @Show_Juel
-show_abl_up_select=>subroutine: @Show_AblUp_Select
-user_abl_up=>subroutine: @UserAblUp
-abl_up=>subroutine: @AblUp##
-input=>inputoutput: Input
-input_result=>condition: Input Result in [0]~[99]
-exist_abl_up=>condition: Exists @AblUp##
-end=>end: Error
+```mermaid
+flowchart TD
+  start([AblUp])
+  show_juel[["@Show_Juel"]]
+  show_abl_up_select[["@Show_AblUp_Select"]]
+  user_abl_up[["@UserAblUp"]]
+  abl_up[["@AblUp##"]]
+  input[/"Input"/]
+  input_result{"Input Result in [0]~[99]"}
+  exist_abl_up{"Exists @AblUp##"}
+  endNode([Error])
 
-start->show_juel->show_abl_up_select->input->input_result
-input_result(yes)->exist_abl_up
-input_result(no)->user_abl_up(top)->show_juel
-exist_abl_up(yes)->abl_up->show_juel
-exist_abl_up(no,left)->input
+  start --> show_juel --> show_abl_up_select --> input --> input_result
+  input_result -->|yes| exist_abl_up
+  input_result -->|no| user_abl_up --> show_juel
+  exist_abl_up -->|yes| abl_up --> show_juel
+  exist_abl_up -->|no| input
 ```
 
 
@@ -206,11 +208,12 @@ exist_abl_up(no,left)->input
 
 > https://osdn.net/projects/emuera/wiki/flow/attach/aftertrain.gif
 
-```flow
-start=>start: AfterTrain
-event_end=>subroutine: @EventEnd
-end=>end: Error
-start->event_end->end
+```mermaid
+flowchart TD
+  start([AfterTrain])
+  event_end[["@EventEnd"]]
+  endNode([Error])
+  start --> event_end --> endNode
 ```
 
 
@@ -225,11 +228,12 @@ start->event_end->end
 
 > https://osdn.net/projects/emuera/wiki/flow/attach/turnend.gif
 
-```flow
-start=>start: TurnEnd
-event_turn_end=>subroutine: @EventTurnEnd
-end=>end: Error
-start->event_turn_end->end
+```mermaid
+flowchart TD
+  start([TurnEnd])
+  event_turn_end[["@EventTurnEnd"]]
+  endNode([Error])
+  start --> event_turn_end --> endNode
 ```
 
 

@@ -1,0 +1,34 @@
+name: VitePress Build Check
+
+# 仅做构建校验，不影响现有 VuePress 部署（deploy.yml 保持原样）。
+# 用于并行迁移期间保证 VitePress 链路不被改坏。
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6.1.0
+        with:
+          version: 12.4.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build (VitePress)
+        run: pnpm docs:build:vp

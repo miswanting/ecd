@@ -5,6 +5,7 @@ import { shikiPlugin } from "@vuepress/plugin-shiki";
 import { registerComponentsPlugin } from "@vuepress/plugin-register-components";
 import { googleAnalyticsPlugin } from "@vuepress/plugin-google-analytics";
 import { markdownChartPlugin } from "@vuepress/plugin-markdown-chart";
+import { searchPlugin } from "@vuepress/plugin-search";
 import erb from './grammars/erb.tmlanguage.json'
 import { navbar, sidebar } from "./configs";
 
@@ -71,5 +72,7 @@ export default defineUserConfig({
     googleAnalyticsPlugin({
       id: 'G-G6WWR5BRFG'
     }),
+    // 本地全文搜索（无需外部服务）
+    searchPlugin({}),
   ]
 })

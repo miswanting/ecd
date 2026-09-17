@@ -70,6 +70,7 @@ export const sidebar: SidebarOptions = {
       ]
     },
     '/reference/Error_Index',
+    '/reference/Version_Index',
   ],
   '/translation/': [
     {

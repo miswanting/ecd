@@ -1,0 +1,1 @@
+function e(e){return e?/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(e)||e.startsWith(`data:`)||e.startsWith(`#`)?e:`${`/ecd/`.replace(/\/+$/,``)}/${String(e).replace(/^\/+/,``)}`:``}export{e as t};

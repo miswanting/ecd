@@ -17,7 +17,12 @@
 8. [ERB 的复合语句](ERB_Compound_Statements)
 9. [ERB 的内置流程](ERB_Internal_Process)
 
+## 速查
+
+10. [兼容性矩阵](Compatibility)
+11. [术语中英日对照](Terminology)
+
 ## 附录
 
-10. [错误索引表](Error_Index)
-11. [版本特性索引](Version_Index)
+12. [错误索引表](Error_Index)
+13. [版本特性索引](Version_Index)

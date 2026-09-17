@@ -37,6 +37,9 @@ export const sidebar: SidebarOptions = {
           children: [
             '/guide/advanced/Experience',
             '/guide/advanced/Case_Study',
+            '/guide/advanced/Publishing',
+            '/guide/advanced/Performance',
+            '/guide/advanced/Debugging',
           ]
         },
       ]
@@ -67,6 +70,13 @@ export const sidebar: SidebarOptions = {
         '/reference/ERB_Statements',
         '/reference/ERB_Compound_Statements',
         '/reference/ERB_Internal_Process',
+      ]
+    },
+    {
+      text: '速查',
+      children: [
+        '/reference/Compatibility',
+        '/reference/Terminology',
       ]
     },
     '/reference/Error_Index',

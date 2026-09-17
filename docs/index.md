@@ -114,6 +114,9 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
 - :green_circle:`教程`[高级教程](guide/advanced/Experience)
   - :green_circle:`教程`[开发实战经验与技巧](guide/advanced/Experience)
   - :green_circle:`教程`[完整实战：打工养成](guide/advanced/Case_Study)
+  - :green_circle:`教程`[发布与打包指南](guide/advanced/Publishing)
+  - :green_circle:`教程`[性能优化](guide/advanced/Performance)
+  - :green_circle:`教程`[调试技巧](guide/advanced/Debugging)
 - :green_circle:`指南`[常见问题（FAQ）](guide/FAQ)
 - :green_circle:`指南`[MCS 代码风格介绍](guide/MCS)
 - :green_circle:`指南`[Era 系列历史](guide/History)
@@ -135,6 +138,9 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
   - :green_circle:`参考`[复合语句](reference/ERB_Compound_Statements)
   - :green_circle:`参考`[内置流程](reference/ERB_Internal_Process)
 - :green_circle:`参考`[错误索引表](reference/Error_Index)
+- :green_circle:`参考`[版本特性索引](reference/Version_Index)
+- :green_circle:`参考`[兼容性矩阵](reference/Compatibility)
+- :green_circle:`参考`[术语中英日对照](reference/Terminology)
 
 ## 第四步：开发部分
 

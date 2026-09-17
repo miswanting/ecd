@@ -58,6 +58,8 @@ export default defineUserConfig({
   plugins: [
     markdownChartPlugin({
       flowchart: true,
+      // 与 VitePress 并存：Flow.md 已改用 mermaid 语法，两个框架都能渲染
+      mermaid: true,
     }),
     shikiPlugin({
       theme: 'slack-dark',

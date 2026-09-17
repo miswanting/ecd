@@ -1,0 +1,1 @@
+import{X as e,Y as t,ct as n,t as r}from"./chunks/framework.CaFWb3SA.js";var i=JSON.parse(`{"title":"MCS 代码风格介绍","description":"","frontmatter":{},"headers":[],"relativePath":"guide/MCS.md","filePath":"guide/MCS.md"}`),a={name:`guide/MCS.md`};function o(r,i,a,o,s,c){return n(),t(`div`,null,[...i[0]||=[e("",26)]])}var s=r(a,[[`render`,o]]);export{i as __pageData,s as default};

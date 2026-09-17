@@ -1,0 +1,1 @@
+import{X as e,Y as t,ct as n,t as r}from"./chunks/framework.CaFWb3SA.js";var i=JSON.parse(`{"title":"指南目录","description":"","frontmatter":{},"headers":[],"relativePath":"guide/index.md","filePath":"guide/index.md"}`),a={name:`guide/index.md`};function o(r,i,a,o,s,c){return n(),t(`div`,null,[...i[0]||=[e("",2)]])}var s=r(a,[[`render`,o]]);export{i as __pageData,s as default};

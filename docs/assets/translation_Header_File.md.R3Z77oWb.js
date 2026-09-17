@@ -1,0 +1,128 @@
+import{X as e,Y as t,ct as n,t as r}from"./chunks/framework.CaFWb3SA.js";var i=JSON.parse(`{"title":"头文件（ERH）","description":"","frontmatter":{},"headers":[],"relativePath":"translation/Header_File.md","filePath":"translation/Header_File.md"}`),a={name:`translation/Header_File.md`};function o(r,i,a,o,s,c){return n(),t(`div`,null,[...i[0]||=[e(`<h1 id="头文件-erh" tabindex="-1">头文件（ERH） <a class="header-anchor" href="#头文件-erh" aria-label="Permalink to “头文件（ERH）”">​</a></h1><blockquote><p>翻译自原文档：<a href="https://osdn.net/projects/emuera/wiki/ERH" target="_blank" rel="noreferrer">https://osdn.net/projects/emuera/wiki/ERH</a></p></blockquote><p>除了扩展名为 <code>ERB</code> 的文件外，<code>ERB</code> 文件夹中还可以放置扩展名为 <code>ERH</code> 的文件。</p><p><code>ERH</code> 文件用于记载需要先于 <code>ERB</code> 处理的内容，具体来说，就是用 <code>#DIM</code>、<code>#DIMS</code> 定义广域变量，用 <code>#DEFINE</code> 定义宏。</p><p><code>ERH</code> 文件中不能书写 <code>#DIM</code>、<code>#DIMS</code> 和 <code>#DEFINE</code> 以外的行。</p><p>Emuera 会读取放在 <code>ERB</code> 文件夹中的所有 <code>*.ERH</code> 文件。</p><p>处理顺序为 <code>csv</code> 文件夹中的文件 → <code>*.ERH</code> → <code>*.ERB</code>，因此 <code>ERH</code> 的效果不会作用于 <code>CSV</code> 文件夹中的内容。</p><p>反过来说，由 <code>_rename.csv</code> 进行的替换也会适用于 <code>*.ERH</code>。</p><p>由于 EramakerEX 不会对 <code>*.ERH</code> 应用 <code>_rename.csv</code>，因此使用 <code>ERH</code> 文件会丧失与 EramakerEX 的兼容性。</p><h2 id="广域变量的声明" tabindex="-1">广域变量的声明 <a class="header-anchor" href="#广域变量的声明" aria-label="Permalink to “广域变量的声明”">​</a></h2><p>另请参阅<a href="./Custom_Variable.html#广域变量的书写格式">用户自定义变量</a>。</p><p>在头文件中可以声明新的变量。</p><p>它不同于在 <code>ERB</code> 中声明的私有变量，而是可以从 <code>ERB</code> 的所有位置引用的广域变量。</p><p>与私有变量不同，广域变量没有 <code>DYNAMIC</code> 和 <code>STATIC</code> 的区别，也不能用 <code>REF</code> 声明引用型变量，但可以用 <code>CONST</code> 以同样的方式声明常量。</p><p>可以声明的变量最高为 3 维。</p><p>如果不指定元素数，就会成为元素数为 1 的数组，因此也可以当作非数组变量使用。</p><p>变量通过 <code>#DIM</code> 或 <code>#DIMS</code> 按如下方式声明。</p><p>另外，写成 <code>#DIM HOGE,1,2</code> 就会成为二维数组。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DIM MY_INT</span></span>
+<span class="line"><span>  #DIM MY_INT_ARRAY, 100</span></span>
+<span class="line"><span>  #DIMS MY_STR</span></span>
+<span class="line"><span>  #DIMS MY_STR_ARRAY, 100</span></span></code></pre></div><p>在 <code>ERH</code> 中像上面这样定义后，在 <code>ERB</code> 中就可以像下面这样作为变量使用：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  MY_INT = 100</span></span>
+<span class="line"><span>  MY_INT_ARRAY:10 = MY_INT_ARRAY:10 + 45</span></span>
+<span class="line"><span>  MY_STR = あああ</span></span>
+<span class="line"><span>  PRINTFORML {MY_INT_ARRAY:10} %MY_STR%</span></span></code></pre></div><p>用 <code>#DIM</code> 声明变量时，元素数除了可以用数值指定外，也可以用常数表达式指定。</p><p>不过要注意，与 <code>*.ERB</code> 中的 <code>#DIM</code> 不同，这里不会展开宏。</p><h3 id="savedata-关键字" tabindex="-1">SAVEDATA 关键字 <a class="header-anchor" href="#savedata-关键字" aria-label="Permalink to “SAVEDATA 关键字”">​</a></h3><p>在声明变量时加上 <code>SAVEDATA</code> 关键字，就可以声明会被保存的变量。</p><p>不过，使用 <code>SAVEDATA</code> 关键字声明可保存的多维变量时，需要启用<code>以二进制格式保存存档</code>选项。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DIM SAVEDATA MY_INT_ARRAY, 100</span></span>
+<span class="line"><span>  #DIMS SAVEDATA MY_STR_ARRAY, 100</span></span></code></pre></div><p>这样声明后，<code>MY_INT_ARRAY</code>、<code>MY_STR_ARRAY</code> 的内容就会像 <code>DAY</code>、<code>MONEY</code> 等既有变量一样被保存和读取。</p><p>反过来说，没有加 <code>SAVEDATA</code> 关键字的变量不会被保存，读取时会被初始化。</p><h3 id="charadata-关键字" tabindex="-1">CHARADATA 关键字 <a class="header-anchor" href="#charadata-关键字" aria-label="Permalink to “CHARADATA 关键字”">​</a></h3><p>在声明变量时加上 <code>CHARADATA</code> 关键字，就可以声明角色变量。</p><p><code>CHARADATA</code> 可以与 <code>SAVEDATA</code> 关键字同时使用。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DIM CHARADATA C_INT_ARRAY, 100</span></span>
+<span class="line"><span>  #DIMS CHARADATA C_STR_ARRAY, 100</span></span>
+<span class="line"><span>  #DIM CHARADATA SAVEDATA CS_INT_ARRAY, 100</span></span></code></pre></div><p>在上面的例子中，<code>C_INT_ARRAY</code>、<code>C_STR_ARRAY</code> 是角色变量，但不会被保存和读取。</p><p><code>CS_INT_ARRAY</code> 是角色变量，并且会被保存和读取。</p><h3 id="global-关键字" tabindex="-1">GLOBAL 关键字 <a class="header-anchor" href="#global-关键字" aria-label="Permalink to “GLOBAL 关键字”">​</a></h3><p>在声明变量时加上 <code>GLOBAL</code> 关键字，就可以声明全局变量。</p><p><code>GLOBAL</code> 可以与 <code>SAVEDATA</code> 关键字同时使用。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DIM GLOBAL G_INT_ARRAY, 100</span></span>
+<span class="line"><span>  #DIMS GLOBAL G_STR_ARRAY, 100</span></span>
+<span class="line"><span>  #DIM GLOBAL SAVEDATA GS_INT_ARRAY, 100</span></span></code></pre></div><p>全局变量在通常的保存、读取时既不会被读取，也不会被初始化。</p><p>由于这一性质，它可以用于在不同的存档之间共享数据。</p><p>如果同时使用 <code>GLOBAL</code> 和 <code>SAVEDATA</code> 关键字，该变量就会由 <code>SAVEGLOBAL</code>、<code>LOADGLOBAL</code> 指令读写到 <code>global.sav</code> 文件。</p><p>其他关于初始值、常量化等的详情，请参阅<a href="./Custom_Variable.html">用户自定义变量</a>。</p><h2 id="宏的定义" tabindex="-1">宏的定义 <a class="header-anchor" href="#宏的定义" aria-label="Permalink to “宏的定义”">​</a></h2><p>这里所说的宏，是把 <code>ERB</code> 代码中的字符串替换为预先定义好的另一个字符串的功能。</p><p>虽然名字叫宏，但它与 Emuera 运行时用 <code>F1</code>～<code>F12</code> 键使用的键盘宏没有关系。</p><p>该功能参考了 C、C++ 的 <code>#define</code>。</p><p>在 <code>ERH</code> 文件中定义宏后，它就会适用于所有 <code>ERB</code> 文件中的代码。</p><h3 id="基本用法" tabindex="-1">基本用法 <a class="header-anchor" href="#基本用法" aria-label="Permalink to “基本用法”">​</a></h3><p>宏的典型定义方式如下：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE &lt;替换源标识符&gt; &lt;替换目标表达式&gt;</span></span></code></pre></div><p>这样，<code>ERB</code> 中的 <code>&lt;替换源标识符&gt;</code> 就会被替换为 <code>&lt;替换目标表达式&gt;</code>。例如，在 <code>.ERH</code> 中定义：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE FIVE 5</span></span></code></pre></div><p>那么 <code>.ERB</code> 中的字符串 <code>FIVE</code> 就会被替换为 <code>5</code>。例如：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = FIVE</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = 5</span></span></code></pre></div><p>宏也可以加行末注释。</p><p>分号之后的内容会作为注释被忽略。</p><p>分号之后的内容不会包含在宏中，也不会被展开。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE FIVE 5 ;注释</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = FIVE + FIVE</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = 5 + 5</span></span></code></pre></div><p>请注意，宏的展开几乎是按字符串原样进行的。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE SIX           1 + 5</span></span>
+<span class="line"><span>  #DEFINE NINE          8 + 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = SIX * NINE</span></span></code></pre></div><p>你也许会以为 <code>X</code> 会被赋值为 6*9 即 36，但实际上：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = 1 + 5 * 8 + 1</span></span></code></pre></div><p>由于乘法优先，结果为 <code>X = 42</code>。</p><p>宏可以展开为 <code>&quot;～～&quot;</code> 这样的字符串常量，也可以展开为变量、函数或表达式。</p><p>只要把它理解为「原样展开 <code>#DEFINE</code> 右侧的字符串」，大致上就能理解了。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE HOGE        &quot;ほげほげ&quot;</span></span>
+<span class="line"><span>  #DEFINE PIYO        A</span></span>
+<span class="line"><span>  #DEFINE FUGA        DA:10</span></span>
+<span class="line"><span>  #DEFINE HOGERA      LOCAL + MY_FUNC(X, Y)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = STRLEN(HOGE)</span></span>
+<span class="line"><span>  Y = PIYO + 5</span></span>
+<span class="line"><span>  FUGA:20 += PIYO</span></span>
+<span class="line"><span>  LOCAL = HOGERA</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  @MY_FUNC(ARG, ARG:1)</span></span>
+<span class="line"><span>  #FUNCTION</span></span>
+<span class="line"><span>    ;～略～</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = STRLEN(&quot;ほげほげ&quot;)</span></span>
+<span class="line"><span>  Y = A + 5</span></span>
+<span class="line"><span>  DA:10:20 += A</span></span>
+<span class="line"><span>  LOCAL = LOCAL + MY_FUNC(X, Y)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  @MY_FUNC(ARG, ARG:1)</span></span>
+<span class="line"><span>  #FUNCTION</span></span>
+<span class="line"><span>    ;～略～</span></span></code></pre></div><p>由于宏是原样按字符串展开的，替换目标也可以不是完整的表达式，而是运算符或表达式的一部分。</p><p>不过，这种用法并不被推荐。</p><p>如果不格外谨慎地使用，会严重损害代码的可读性。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE PLUS       +</span></span>
+<span class="line"><span>  #DEFINE FIVEPLUS   5 +</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = 1 PLUS 2</span></span>
+<span class="line"><span>  Y = FIVEPLUS 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = 1 + 2</span></span>
+<span class="line"><span>  Y = 5 + 2</span></span></code></pre></div><h3 id="宏的多重展开" tabindex="-1">宏的多重展开 <a class="header-anchor" href="#宏的多重展开" aria-label="Permalink to “宏的多重展开”">​</a></h3><p>可以定义包含宏的宏。这样的宏会在加载 <code>ERB</code> 时被反复展开，直到宏无法再被应用为止。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE FIVE_1 5</span></span>
+<span class="line"><span>  #DEFINE FIVE_2 FIVE_1 + FIVE_1</span></span>
+<span class="line"><span>  #DEFINE FIVE_3 FIVE_2 + FIVE_2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  X = FIVE_3</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  X = 5 + 5 + 5 + 5</span></span></code></pre></div><p>如果反复展开一定次数后宏仍然残留，Emuera 会认为它疑似自我引用或循环引用宏，从而终止处理并以错误结束。</p><p>请注意不要写出下面这样的自我引用或循环引用宏。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE HOGE HOGE</span></span>
+<span class="line"><span>  #DEFINE PIYO FUGA + 1</span></span>
+<span class="line"><span>  #DEFINE FUGA PIYO + 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>;会出错</span></span>
+<span class="line"><span>  X = HOGE</span></span>
+<span class="line"><span>  Y = PIYO</span></span></code></pre></div><h3 id="预处理指令" tabindex="-1">预处理指令 <a class="header-anchor" href="#预处理指令" aria-label="Permalink to “预处理指令”">​</a></h3><p>根据名为 <code>XXX</code> 的宏是否已定义，可以分支决定是否执行多行内容。</p><p><code>[IF XXX]</code> 行与 <code>[ENDIF]</code> 行之间的行，只有在 <code>XXX</code> 被 <code>#DEFINE</code> 定义时才会执行。</p><p>例如，可以这样使用：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  [IF HOGE]</span></span>
+<span class="line"><span>    PRINTL HOGE 已被定义</span></span>
+<span class="line"><span>  [ELSEIF PUYO]</span></span>
+<span class="line"><span>    PRINTL HOGE 未被定义</span></span>
+<span class="line"><span>    PRINTL PUYO 已被定义</span></span>
+<span class="line"><span>  [ELSE]</span></span>
+<span class="line"><span>    PRINTL HOGE 和 PUYO 都未被定义</span></span>
+<span class="line"><span>  [ENDIF]</span></span></code></pre></div><p>出于这一目的，也可以定义空宏（没有替换目标的宏）。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE HOGE</span></span></code></pre></div><h3 id="宏的限制条件" tabindex="-1">宏的限制条件 <a class="header-anchor" href="#宏的限制条件" aria-label="Permalink to “宏的限制条件”">​</a></h3><p>宏基本上只在表达式中展开。</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE FIVE 5</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  PRINT FIVE</span></span></code></pre></div><p>这样只会打印出文本 <code>FIVE</code>。</p><p>这与 <code>PRINT X</code> 只打印字母 X、而不是 X 的值是同样的道理。</p><p>宏的替换目标不能是赋值运算符，也不能是包含赋值运算符的表达式。</p><p>下面的宏定义会出错：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>;会出错</span></span>
+<span class="line"><span>  #DEFINE HOGE =</span></span>
+<span class="line"><span>  #DEFINE PUGE X = 1</span></span></code></pre></div><p>前面说过宏可以替换表达式的部分，但括号的对应关系必须在宏内部闭合。下面的宏定义会出错：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>;会出错</span></span>
+<span class="line"><span>  #DEFINE HOGE ( X +</span></span>
+<span class="line"><span>  #DEFINE PUGE Y )</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  Z = HOGE PUGE</span></span></code></pre></div><p>不能把宏替换为指令。</p><p>下面的宏定义会出错：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE MY_PRINTL     PRINTL</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  MY_PRINTL 这是 PRINTL</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>;会出错</span></span></code></pre></div><p>如前所述，宏只适用于 <code>*.ERB</code>，不适用于 <code>*.csv</code> 和 <code>*.ERH</code>。</p><p>另外，即使在 <code>*.ERB</code> 内，也不会适用于预处理指令、属性名以及行首的记号。</p><p><code>[SKIPSTART]</code> 等、<code>#DIM</code> 和 <code>#FUNCTION</code> 等、<code>@EVENTFIRST</code> 等中的 <code>@</code> 部分，都不是替换对象。</p><p>例如，即使写成 <code>#DEFINE HOGE SKIPSTART</code>，也不会由 <code>[HOGE]</code> 开始注释。</p><p>不过，即使是 <code>#</code> 之后的字符串，<code>#DIM</code> 的变量名等仍然是替换对象。</p><p>例如，下面的代码：</p><div class="language-"><button title="Copy code" data-copied="Copied" class="copy"></button><span class="lang"></span><pre class="shiki slack-dark" style="background-color:#222222;color:#E6E6E6;" tabindex="0" dir="ltr"><code><span class="line"><span>;&lt;*.ERH&gt;</span></span>
+<span class="line"><span>  #DEFINE HOGE MY_INT</span></span>
+<span class="line"><span>  #DEFINE FIVE 5</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;&lt;*.ERB&gt;</span></span>
+<span class="line"><span>  @FUNC</span></span>
+<span class="line"><span>  #DIM HOGE, FIVE</span></span>
+<span class="line"><span>  HOGE:0 = 10</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>;(展开后)</span></span>
+<span class="line"><span>  @FUNC</span></span>
+<span class="line"><span>  #DIM MY_INT, 5</span></span>
+<span class="line"><span>  MY_INT:0 = 10</span></span></code></pre></div><p>会像上面这样展开，因此可以正常工作。</p>`,105)]])}var s=r(a,[[`render`,o]]);export{i as __pageData,s as default};

@@ -11,6 +11,7 @@
  *   `resolvePageLayout` 遇未知 layout 会直接抛错。
  */
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-mermaid-plugin'
 import { navbar, sidebar } from '../.vuepress/configs'
 import erb from '../.vuepress/grammars/erb.tmlanguage.json'
 
@@ -77,13 +78,26 @@ const homeHero = {
   ],
 }
 
-export default defineConfig({
+export default withMermaid(
+  defineConfig({
   base,
   lang: 'zh-CN',
   title: 'Era 中文文档',
   description: 'Eramaker + Emuera + EraBasic 中文文档',
   // VitePress 的 head 不会自动加 base，这里显式拼上
-  head: [['link', { rel: 'icon', href: `${base}favicon.svg` }]],
+  head: [
+    ['link', { rel: 'icon', href: `${base}favicon.svg` }],
+    // Google Analytics（VitePress 无插件，按官方文档用 head 注入 gtag）
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-G6WWR5BRFG' },
+    ],
+    [
+      'script',
+      {},
+      `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G6WWR5BRFG');`,
+    ],
+  ],
   // 并行期先放宽死链，避免游离页面（spec/、*-df32 等）挡住构建
   ignoreDeadLinks: true,
 
@@ -126,4 +140,5 @@ export default defineConfig({
     publicDir: '.vuepress/public',
     server: { port: 8080 },
   },
-})
+}),
+)

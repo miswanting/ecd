@@ -11,10 +11,15 @@ const modules = import.meta.glob('../../../src/components/*.vue', { eager: true 
 
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app }) {
+  enhanceApp({ app, router }) {
     for (const [file, mod] of Object.entries(modules)) {
       const name = file.split('/').pop()!.replace(/\.vue$/, '')
       app.component(name, (mod as { default: any }).default)
+    }
+
+    // GA：head 注入的 gtag 只处理首屏，SPA 路由切换需手动上报
+    router.onAfterRouteChange = (to: string) => {
+      ;(globalThis as any).gtag?.('config', 'G-G6WWR5BRFG', { page_path: to })
     }
   },
 } satisfies Theme

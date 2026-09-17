@@ -35,9 +35,13 @@ jobs:
         run: |
           cd documentation
           pnpm i
-          pnpm run docs:build
+          # 当前线上由 VitePress 构建（并行迁移中）。
+          # 需要回退到 VuePress 时，把下面两行换回：
+          #   pnpm run docs:build
+          #   mv documentation/docs/.vuepress/dist dist
+          pnpm run docs:build:vp
           cd ..
-          mv documentation/docs/.vuepress/dist dist
+          mv documentation/docs/.vitepress/dist dist
           rm -r documentation
 
       - name: Try Delete Old Version

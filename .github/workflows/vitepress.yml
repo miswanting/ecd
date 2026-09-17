@@ -1,13 +1,11 @@
 name: VitePress Build Check
 
-# 仅做构建校验，不影响现有 VuePress 部署（deploy.yml 保持原样）。
-# 用于并行迁移期间保证 VitePress 链路不被改坏。
+# 仅做 PR 构建校验（push 到 dev 由 deploy.yml 负责构建并发布，避免重复构建）。
+# 不影响从 VuePress 回退：deploy.yml 保留了一键切回的注释。
 
 on:
-  push:
-    branches:
-      - dev
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:

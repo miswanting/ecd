@@ -69,6 +69,9 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
    - :green_circle:`直译`[EraBasic 的结构](translation/EraBasic_Structure)
    - :green_circle:`直译`[EraBasic 的变量](translation/EraBasic_Variables)
 2. Emuera 部分
+   - :green_circle:`直译`[使用指南](translation/Usage)
+   - :green_circle:`直译`[配置项详解](translation/Config_Settings)
+   - :green_circle:`直译`[快捷键](translation/Shortcut)
    - :green_circle:`直译`[术语表](translation/Glossary)
    - :green_circle:`直译`[调试命令](translation/Debug_Command)
    - :green_circle:`直译`[调试模式](translation/Debug_Mode)
@@ -110,6 +113,8 @@ footer: GPL-3.0+ Licensed | Copyright © 2021-Present Miswanting
   - :green_circle:`教程`[角色的定义、注册、使用与注销](guide/advanced/Character)
 - :green_circle:`教程`[高级教程](guide/advanced/Experience)
   - :green_circle:`教程`[开发实战经验与技巧](guide/advanced/Experience)
+  - :green_circle:`教程`[完整实战：打工养成](guide/advanced/Case_Study)
+- :green_circle:`指南`[常见问题（FAQ）](guide/FAQ)
 - :green_circle:`指南`[MCS 代码风格介绍](guide/MCS)
 - :green_circle:`指南`[Era 系列历史](guide/History)
 

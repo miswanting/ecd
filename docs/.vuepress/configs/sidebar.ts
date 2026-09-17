@@ -8,6 +8,7 @@ export const sidebar: SidebarOptions = {
         '/guide/',
         '/guide/Quick_Start',
         '/guide/Emuera_Engine',
+        '/guide/FAQ',
         {
           text: '入门教程',
           children: [
@@ -35,6 +36,7 @@ export const sidebar: SidebarOptions = {
           text: '高级教程',
           children: [
             '/guide/advanced/Experience',
+            '/guide/advanced/Case_Study',
           ]
         },
       ]
@@ -82,6 +84,9 @@ export const sidebar: SidebarOptions = {
     {
       text: 'Emuera 部分',
       children: [
+        '/translation/Usage',
+        '/translation/Config_Settings',
+        '/translation/Shortcut',
         '/translation/Glossary',
         '/translation/Debug_Command',
         '/translation/Debug_Mode',
